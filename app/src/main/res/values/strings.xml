@@ -1,19 +1,25 @@
 <resources>
     <string name="app_name">FoodCalendar</string>
-    <string name="welcome_message">Welcome to FoodCalendar</string>
-    <string name="enter_data">Enter your data</string>
-    <string name="age">Age</string>
-    <string name="weight">Weight</string>
-    <string name="height">Height</string>
-    <string name="goal">Goal</string>
+    <string name="welcome_message">Welcome to FoodCalendar!</string>
+    <string name="enter_details">Enter your details</string>
+    <string name="name">Name</string>
+    <string name="weight">Weight (kg)</string>
+    <string name="height">Height (cm)</string>
+    <string name="calorie_goal">Calorie Goal</string>
     <string name="save">Save</string>
-    <string name="add_meal">Add Meal</string>
-    <string name="breakfast">Breakfast</string>
-    <string name="lunch">Lunch</string>
-    <string name="dinner">Dinner</string>
-    <string name="snack">Snack</string>
+    <string name="add_meal">Add a Meal</string>
+    <string name="meal_name">Meal Name</string>
     <string name="calories">Calories</string>
-    <string name="remaining_calories">Remaining Calories</string>
+    <string name="protein">Protein (g)</string>
+    <string name="fat">Fat (g)</string>
+    <string name="carbs">Carbs (g)</string>
+    <string-array name="meal_categories">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+        <item>Snack</item>
+    </string-array>
     <string name="statistics">Statistics</string>
-    <string name="history">History</string>
+    <string name="selected_date">Selected Date:</string>
+    <string name="view_statistics">View Statistics</string>
 </resources>

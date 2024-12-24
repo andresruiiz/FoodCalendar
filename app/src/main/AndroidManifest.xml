@@ -16,10 +16,7 @@
             android:name=".StatisticsActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RegisterActivity"
+            android:name=".AddMealActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

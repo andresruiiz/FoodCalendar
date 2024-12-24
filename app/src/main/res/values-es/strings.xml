@@ -1,19 +1,25 @@
 <resources>
     <string name="app_name">FoodCalendar</string>
-    <string name="welcome_message">Bienvenido a FoodCalendar</string>
-    <string name="enter_data">Introduce tus datos</string>
-    <string name="age">Edad</string>
-    <string name="weight">Peso</string>
-    <string name="height">Altura</string>
-    <string name="goal">Objetivo</string>
+    <string name="welcome_message">¡Bienvenido a FoodCalendar!</string>
+    <string name="enter_details">Ingresa tus datos</string>
+    <string name="name">Nombre</string>
+    <string name="weight">Peso (kg)</string>
+    <string name="height">Altura (cm)</string>
+    <string name="calorie_goal">Objetivo calórico</string>
     <string name="save">Guardar</string>
-    <string name="add_meal">Añadir Comida</string>
-    <string name="breakfast">Desayuno</string>
-    <string name="lunch">Almuerzo</string>
-    <string name="dinner">Cena</string>
-    <string name="snack">Merienda</string>
+    <string name="add_meal">Añadir una comida</string>
+    <string name="meal_name">Nombre de la comida</string>
     <string name="calories">Calorías</string>
-    <string name="remaining_calories">Calorías Restantes</string>
+    <string name="protein">Proteínas (g)</string>
+    <string name="fat">Grasas (g)</string>
+    <string name="carbs">Carbohidratos (g)</string>
+    <string-array name="meal_categories">
+        <item>Desayuno</item>
+        <item>Almuerzo</item>
+        <item>Cena</item>
+        <item>Merienda</item>
+    </string-array>
     <string name="statistics">Estadísticas</string>
-    <string name="history">Historial</string>
+    <string name="selected_date">Fecha seleccionada:</string>
+    <string name="view_statistics">Ver estadísticas</string>
 </resources>

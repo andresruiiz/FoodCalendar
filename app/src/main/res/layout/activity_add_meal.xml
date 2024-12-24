@@ -7,53 +7,59 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/welcomeMessage"
+        android:id="@+id/addMealTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_message"
+        android:text="@string/add_meal"
         android:textSize="18sp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dp" />
 
     <EditText
-        android:id="@+id/nameInput"
+        android:id="@+id/mealNameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/name" />
+        android:hint="@string/meal_name" />
 
     <EditText
-        android:id="@+id/weightInput"
+        android:id="@+id/calorieInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/weight"
+        android:hint="@string/calories"
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/heightInput"
+        android:id="@+id/proteinInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/height"
+        android:hint="@string/protein"
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/calorieGoalInput"
+        android:id="@+id/fatInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/calorie_goal"
+        android:hint="@string/fat"
         android:inputType="number" />
+
+    <EditText
+        android:id="@+id/carbsInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/carbs"
+        android:inputType="number" />
+
+    <Spinner
+        android:id="@+id/mealCategorySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:entries="@array/meal_categories" />
 
     <Button
-        android:id="@+id/saveButton"
+        android:id="@+id/saveMealButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:layout_marginTop="20dp" />
-
-    <Button
-        android:id="@+id/statsButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/view_statistics"
-        android:layout_marginTop="16dp" />
-
 </LinearLayout>
