@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">FoodCalendar</string>
+    <string name="welcome_message">Bienvenido a FoodCalendar</string>
+    <string name="enter_data">Introduce tus datos</string>
+    <string name="age">Edad</string>
+    <string name="weight">Peso</string>
+    <string name="height">Altura</string>
+    <string name="goal">Objetivo</string>
+    <string name="save">Guardar</string>
+    <string name="add_meal">Añadir Comida</string>
+    <string name="breakfast">Desayuno</string>
+    <string name="lunch">Almuerzo</string>
+    <string name="dinner">Cena</string>
+    <string name="snack">Merienda</string>
+    <string name="calories">Calorías</string>
+    <string name="remaining_calories">Calorías Restantes</string>
+    <string name="statistics">Estadísticas</string>
+    <string name="history">Historial</string>
+</resources>
