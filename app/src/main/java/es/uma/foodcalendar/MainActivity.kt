@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         // Save data locally
         val sharedPreferences: SharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE)
 
-        // Check if data is already saved
+        // Check if data is already saved.
         val name = sharedPreferences.getString("name", null)
         if (name != null) {
             fabProfile.show()
