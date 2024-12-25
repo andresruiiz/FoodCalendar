@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,9 +19,18 @@ class MainActivity : AppCompatActivity() {
         val heightInput = findViewById<EditText>(R.id.heightInput)
         val calorieGoalInput = findViewById<EditText>(R.id.calorieGoalInput)
         val saveButton = findViewById<Button>(R.id.saveButton)
+        val fabProfile = findViewById<FloatingActionButton>(R.id.fab_profile)
 
         // Save data locally
         val sharedPreferences: SharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE)
+
+        // Check if data is already saved
+        val name = sharedPreferences.getString("name", null)
+        if (name != null) {
+            fabProfile.show()
+        } else {
+            fabProfile.hide()
+        }
 
         saveButton.setOnClickListener {
             val name = nameInput.text.toString()
@@ -38,6 +48,9 @@ class MainActivity : AppCompatActivity() {
 
                 Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show()
 
+                // Show the floating action button
+                fabProfile.show()
+
                 // Navigate to AddMealActivity (next step)
                 val intent = Intent(this, AddMealActivity::class.java)
                 startActivity(intent)
@@ -53,5 +66,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Listener for the floating action button to navigate to ProfileActivity
+        fabProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
