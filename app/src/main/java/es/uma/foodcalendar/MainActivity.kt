@@ -12,6 +12,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val sharedPreferences: SharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE)
+
+        // Check if user data already exists
+        if (userExists(sharedPreferences)) {
+            // Redirect to AddMealActivity if user is already registered
+            val intent = Intent(this, AddMealActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_main)
 
         val nameInput = findViewById<EditText>(R.id.nameInput)
@@ -21,12 +33,8 @@ class MainActivity : AppCompatActivity() {
         val saveButton = findViewById<Button>(R.id.saveButton)
         val fabProfile = findViewById<FloatingActionButton>(R.id.fab_profile)
 
-        // Save data locally
-        val sharedPreferences: SharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE)
-
         // Check if data is already saved.
-        val name = sharedPreferences.getString("name", null)
-        if (name != null) {
+        if (userExists(sharedPreferences)) {
             fabProfile.show()
         } else {
             fabProfile.hide()
@@ -71,5 +79,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun userExists(sharedPreferences: SharedPreferences): Boolean {
+        val name = sharedPreferences.getString("name", null)
+        val weight = sharedPreferences.getInt("weight", -1)
+        val height = sharedPreferences.getInt("height", -1)
+        val calorieGoal = sharedPreferences.getInt("calorieGoal", -1)
+
+        return !name.isNullOrEmpty() && weight != -1 && height != -1 && calorieGoal != -1
     }
 }

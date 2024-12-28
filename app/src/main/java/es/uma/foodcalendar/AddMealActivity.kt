@@ -1,8 +1,11 @@
 package es.uma.foodcalendar
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,8 +21,17 @@ class AddMealActivity : AppCompatActivity() {
         val carbsInput = findViewById<EditText>(R.id.carbsInput)
         val mealCategorySpinner = findViewById<Spinner>(R.id.mealCategorySpinner)
         val saveMealButton = findViewById<Button>(R.id.saveMealButton)
+        val fabProfile = findViewById<FloatingActionButton>(R.id.fab_profile)
 
         val dbHelper = DatabaseHelper(this)
+        val sharedPreferences: SharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE)
+
+        // Check if user data already exists
+        if (userExists(sharedPreferences)) {
+            fabProfile.show()
+        } else {
+            fabProfile.hide()
+        }
 
         saveMealButton.setOnClickListener {
             val mealName = mealNameInput.text.toString()
@@ -46,5 +58,20 @@ class AddMealActivity : AppCompatActivity() {
                 Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
+
+        // Listener for the floating action button to navigate to ProfileActivity
+        fabProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun userExists(sharedPreferences: SharedPreferences): Boolean {
+        val name = sharedPreferences.getString("name", null)
+        val weight = sharedPreferences.getInt("weight", -1)
+        val height = sharedPreferences.getInt("height", -1)
+        val calorieGoal = sharedPreferences.getInt("calorieGoal", -1)
+
+        return !name.isNullOrEmpty() && weight != -1 && height != -1 && calorieGoal != -1
     }
 }
