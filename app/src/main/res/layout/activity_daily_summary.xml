@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvCaloriesConsumed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calories Consumed: 0"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvCaloriesRemaining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calories Remaining: 0"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Breakfast -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Breakfast"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnAddBreakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+" />
+
+            <Button
+                android:id="@+id/btnCreateBreakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvSelectedBreakfast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selected Breakfast: None"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Lunch -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Lunch"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnAddLunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+" />
+
+            <Button
+                android:id="@+id/btnCreateLunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvSelectedLunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selected Lunch: None"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Dinner -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dinner"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnAddDinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+" />
+
+            <Button
+                android:id="@+id/btnCreateDinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvSelectedDinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selected Dinner: None"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+    </LinearLayout>
+</LinearLayout>

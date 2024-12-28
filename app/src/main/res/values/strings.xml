@@ -65,4 +65,7 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_daily_summary">DailySummaryActivity</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="title_activity_meal_list">MealListActivity</string>
 </resources>

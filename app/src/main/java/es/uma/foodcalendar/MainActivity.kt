@@ -17,8 +17,8 @@ class MainActivity : AppCompatActivity() {
 
         // Check if user data already exists
         if (userExists(sharedPreferences)) {
-            // Redirect to AddMealActivity if user is already registered
-            val intent = Intent(this, AddMealActivity::class.java)
+            // Redirect to DailySummaryActivity if user is already registered
+            val intent = Intent(this, DailySummaryActivity::class.java)
             startActivity(intent)
             finish()
             return
@@ -59,8 +59,8 @@ class MainActivity : AppCompatActivity() {
                 // Show the floating action button
                 fabProfile.show()
 
-                // Navigate to AddMealActivity (next step)
-                val intent = Intent(this, AddMealActivity::class.java)
+                // Navigate to DailySummaryActivity (next step)
+                val intent = Intent(this, DailySummaryActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
         val statsButton = findViewById<Button>(R.id.statsButton)
         statsButton.setOnClickListener {
-            val intent = Intent(this, StatisticsActivity::class.java)
+            val intent = Intent(this, CalendarActivity::class.java)
             startActivity(intent)
         }
 

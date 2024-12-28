@@ -46,8 +46,8 @@ class AddMealActivity : AppCompatActivity() {
                 fat.isNotEmpty() && carbs.isNotEmpty()) {
                 val db = dbHelper.writableDatabase
                 val query = """
-                    INSERT INTO ${DatabaseHelper.TABLE_MEALS} 
-                    (${DatabaseHelper.COLUMN_NAME}, ${DatabaseHelper.COLUMN_CALORIES}, ${DatabaseHelper.COLUMN_PROTEIN}, 
+                    INSERT INTO ${DatabaseHelper.TABLE_MEALS}
+                    (${DatabaseHelper.COLUMN_NAME}, ${DatabaseHelper.COLUMN_CALORIES}, ${DatabaseHelper.COLUMN_PROTEIN},
                     ${DatabaseHelper.COLUMN_FAT}, ${DatabaseHelper.COLUMN_CARBS}, ${DatabaseHelper.COLUMN_CATEGORY}, ${DatabaseHelper.COLUMN_DATE})
                     VALUES ('$mealName', $calories, $protein, $fat, $carbs, '$category', '$date')
                 """

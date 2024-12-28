@@ -13,6 +13,21 @@
         android:theme="@style/Theme.FoodCalendar"
         tools:targetApi="31">
         <activity
+            android:name=".MealListActivity"
+            android:exported="false"
+            android:label="@string/title_activity_meal_list"
+            android:theme="@style/Theme.FoodCalendar" />
+        <activity
+            android:name=".CalendarActivity"
+            android:exported="false"
+            android:label="@string/title_activity_calendar"
+            android:theme="@style/Theme.FoodCalendar" />
+        <activity
+            android:name=".DailySummaryActivity"
+            android:exported="false"
+            android:label="@string/title_activity_daily_summary"
+            android:theme="@style/Theme.FoodCalendar" />
+        <activity
             android:name=".ProfileActivity"
             android:exported="false"
             android:label="@string/title_activity_profile"
