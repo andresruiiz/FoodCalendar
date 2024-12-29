@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">FoodCalendar</string>
-    <string name="welcome_message">¡Bienvenido a FoodCalendar!</string>
+    <string name="welcome_message">¡Bienvenido a FoodCalendar! Introduce tus datos para comenzar a utilizar la app.</string>
     <string name="enter_details">Ingresa tus datos</string>
     <string name="name">Nombre</string>
     <string name="weight">Peso (kg)</string>
     <string name="height">Altura (cm)</string>
-    <string name="calorie_goal">Objetivo calórico</string>
     <string name="save">Guardar</string>
     <string name="add_food">Añadir alimento</string>
     <string name="introduce_details">Introduce los detalles</string>
@@ -47,4 +46,15 @@
     <string name="total_calories">Calorías Totales: %1$d kcal</string>
     <string name="add_new_food">Añadir nuevo alimento</string>
     <string name="select_a_food">Selecciona un alimento</string>
+    <string name="user_name">Nombre de usuario</string>
+    <string name="user_weight">Peso: %1$d kg</string>
+    <string name="user_height">Altura: %1$d cm</string>
+    <string name="calorie_goal">Objetivo de Calorías</string>
+    <string name="save_button">Guardar</string>
+    <string name="calorie_goal_updated">Objetivo de calorías actualizado</string>
+    <string name="food_added">Alimento añadido correctamente</string>
+    <string name="complete_fields">Por favor completa todos los campos</string>
+    <string name="meal_quantity_updated">Cantidad de comida actualizada</string>
+    <string name="meal_added_successfully">Comida añadida correctamente</string>
+    <string name="user_data_saved">Datos guardados correctamente</string>
 </resources>

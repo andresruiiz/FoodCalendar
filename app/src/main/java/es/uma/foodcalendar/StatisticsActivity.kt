@@ -1,5 +1,6 @@
 package es.uma.foodcalendar
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ class StatisticsActivity : AppCompatActivity() {
 
     private var selectedDate: String = ""
 
+    @SuppressLint("DefaultLocale")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistics)

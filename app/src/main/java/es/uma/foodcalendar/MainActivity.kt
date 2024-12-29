@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 editor.putInt("calorieGoal", calorieGoal.toInt())
                 editor.apply()
 
-                Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.user_data_saved, Toast.LENGTH_SHORT).show()
 
                 // Show the floating action button
                 fabProfile.show()
@@ -64,14 +64,8 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             } else {
-                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.complete_fields, Toast.LENGTH_SHORT).show()
             }
-        }
-
-        val statsButton = findViewById<Button>(R.id.statsButton)
-        statsButton.setOnClickListener {
-            val intent = Intent(this, StatisticsActivity::class.java)
-            startActivity(intent)
         }
 
         // Listener for the floating action button to navigate to ProfileActivity

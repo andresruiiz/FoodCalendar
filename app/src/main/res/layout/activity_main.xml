@@ -49,13 +49,6 @@
         android:text="@string/save"
         android:layout_marginTop="20dp" />
 
-    <Button
-        android:id="@+id/statsButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/view_statistics"
-        android:layout_marginTop="16dp" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/fab_profile"
     android:layout_width="wrap_content"

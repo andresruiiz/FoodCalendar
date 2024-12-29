@@ -28,13 +28,13 @@ class AddFoodActivity : AppCompatActivity() {
 
             if (name.isNotEmpty() && calories > 0) {
                 repository.addFood(name, calories, protein, fat, carbs)
-                Toast.makeText(this, "Food added successfully!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.food_added, Toast.LENGTH_SHORT).show()
 
                 // Enviar un resultado exitoso a AddMealActivity
                 setResult(Activity.RESULT_OK)
                 finish()
             } else {
-                Toast.makeText(this, "Please complete all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.complete_fields, Toast.LENGTH_SHORT).show()
             }
         }
     }

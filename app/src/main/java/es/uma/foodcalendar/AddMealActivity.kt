@@ -42,7 +42,7 @@ class AddMealActivity : AppCompatActivity() {
             if (existingMeal != null) {
                 // Incrementar la cantidad si ya existe
                 repository.updateMealQuantity(existingMeal.id, existingMeal.quantity + 1)
-                Toast.makeText(this, "Meal quantity updated!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.meal_quantity_updated, Toast.LENGTH_SHORT).show()
             } else {
                 // Añadir una nueva comida si no existe
                 repository.addMeal(
@@ -51,7 +51,7 @@ class AddMealActivity : AppCompatActivity() {
                     timeOfDay = timeOfDay,
                     quantity = 1
                 )
-                Toast.makeText(this, "Meal added successfully!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.meal_added_successfully, Toast.LENGTH_SHORT).show()
             }
 
             setResult(Activity.RESULT_OK)
