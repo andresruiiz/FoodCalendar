@@ -25,4 +25,12 @@
         android:layout_height="wrap_content"
         android:text="@string/add_new_food"
         android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnSearchFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/search_food"
+        android:layout_marginTop="8dp" />
+
 </LinearLayout>

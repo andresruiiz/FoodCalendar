@@ -11,6 +11,7 @@ class AddMealActivity : AppCompatActivity() {
     private lateinit var repository: FoodCalendarRepository
     private lateinit var foodListView: ListView
     private lateinit var btnAddNewFood: Button
+    private lateinit var btnSearchFood: Button
     private var foods: List<Food> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +21,7 @@ class AddMealActivity : AppCompatActivity() {
         repository = FoodCalendarRepository(this)
         foodListView = findViewById(R.id.foodListView)
         btnAddNewFood = findViewById(R.id.btnAddNewFood)
+        btnSearchFood = findViewById(R.id.btnSearchFood)
 
         // Obtener la fecha y franja horaria desde el intent
         val date = intent.getStringExtra("date") ?: return
@@ -64,6 +66,12 @@ class AddMealActivity : AppCompatActivity() {
             val intent = Intent(this, AddFoodActivity::class.java)
             startActivityForResult(intent, ADD_FOOD_REQUEST_CODE)
         }
+
+        btnSearchFood.setOnClickListener {
+            val intent = Intent(this, SearchFoodActivity::class.java)
+            startActivityForResult(intent, SEARCH_FOOD_REQUEST_CODE)
+        }
+
     }
 
     // Cargar alimentos desde la base de datos
@@ -77,13 +85,14 @@ class AddMealActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == ADD_FOOD_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            // Recargar la lista de alimentos
+        if ((requestCode == ADD_FOOD_REQUEST_CODE || requestCode == SEARCH_FOOD_REQUEST_CODE) && resultCode == Activity.RESULT_OK) {
             loadFoods()
         }
     }
 
+
     companion object {
         const val ADD_FOOD_REQUEST_CODE = 1
+        const val SEARCH_FOOD_REQUEST_CODE = 1
     }
 }
