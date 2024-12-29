@@ -135,5 +135,51 @@ class FoodCalendarRepository(context: Context) {
         return meals
     }
 
+    fun getMealByFoodIdAndTime(foodId: Long, date: String, timeOfDay: String): Meal? {
+        val db = dbHelper.readableDatabase
+        val query = """
+        SELECT m.${BaseColumns._ID}, f.${FoodCalendarContract.Foods.COLUMN_NAME}, 
+               f.${FoodCalendarContract.Foods.COLUMN_CALORIES}, 
+               m.${FoodCalendarContract.Meals.COLUMN_QUANTITY}, 
+               m.${FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY}, 
+               m.${FoodCalendarContract.Meals.COLUMN_DATE}
+        FROM ${FoodCalendarContract.Meals.TABLE_NAME} m
+        JOIN ${FoodCalendarContract.Foods.TABLE_NAME} f
+        ON m.${FoodCalendarContract.Meals.COLUMN_FOOD_ID} = f.${BaseColumns._ID}
+        WHERE m.${FoodCalendarContract.Meals.COLUMN_FOOD_ID} = ? 
+        AND m.${FoodCalendarContract.Meals.COLUMN_DATE} = ? 
+        AND m.${FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY} = ?
+    """
+        val cursor = db.rawQuery(query, arrayOf(foodId.toString(), date, timeOfDay))
+        var meal: Meal? = null
+
+        if (cursor.moveToFirst()) {
+            val id = cursor.getLong(cursor.getColumnIndexOrThrow(BaseColumns._ID))
+            val name = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_NAME))
+            val calories = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_CALORIES))
+            val quantity = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_QUANTITY))
+            val time = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY))
+            val mealDate = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_DATE))
+
+            meal = Meal(id, name, calories * quantity, quantity, time, mealDate)
+        }
+
+        cursor.close()
+        return meal
+    }
+
+
+    fun updateMealQuantity(mealId: Long, newQuantity: Int) {
+        val db = dbHelper.writableDatabase
+        val values = ContentValues().apply {
+            put(FoodCalendarContract.Meals.COLUMN_QUANTITY, newQuantity)
+        }
+        db.update(
+            FoodCalendarContract.Meals.TABLE_NAME,
+            values,
+            "${BaseColumns._ID} = ?",
+            arrayOf(mealId.toString())
+        )
+    }
 
 }

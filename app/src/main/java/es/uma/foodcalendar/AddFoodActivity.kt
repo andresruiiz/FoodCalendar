@@ -1,5 +1,6 @@
 package es.uma.foodcalendar
 
+import android.app.Activity
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -27,8 +28,11 @@ class AddFoodActivity : AppCompatActivity() {
 
             if (name.isNotEmpty() && calories > 0) {
                 repository.addFood(name, calories, protein, fat, carbs)
-                Toast.makeText(this, "Food added successfully", Toast.LENGTH_SHORT).show()
-                finish() // Vuelve a la actividad anterior
+                Toast.makeText(this, "Food added successfully!", Toast.LENGTH_SHORT).show()
+
+                // Enviar un resultado exitoso a AddMealActivity
+                setResult(Activity.RESULT_OK)
+                finish()
             } else {
                 Toast.makeText(this, "Please complete all fields", Toast.LENGTH_SHORT).show()
             }

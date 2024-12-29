@@ -1,163 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DailySummaryActivity">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvCaloriesConsumed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calories_consumed"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"/>
+
+                <TextView
+                    android:id="@+id/tvCaloriesRemaining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/calories_remaining"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/tvCaloriesConsumed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/calories_consumed"
-            android:textSize="18sp"
-            android:layout_marginBottom="8dp" />
-
-        <TextView
-            android:id="@+id/tvCaloriesRemaining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/calories_remaining"
-            android:textSize="18sp"
-            android:layout_marginBottom="16dp" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <!-- Breakfast -->
-            <LinearLayout
+            <!-- Breakfast Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/breakfast"
-                    android:textSize="16sp" />
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <Button
-                    android:id="@+id/btnAddBreakfast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/tvSelectedBreakfast"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/selected_breakfast"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/breakfast"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
-            <!-- Lunch -->
-            <LinearLayout
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAddBreakfast"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add"
+                            style="@style/Widget.Material3.Button.TonalButton"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvSelectedBreakfast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/selected_breakfast"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Lunch Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lunch"
-                    android:textSize="16sp" />
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <Button
-                    android:id="@+id/btnAddLunch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-            </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/lunch"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
-            <TextView
-                android:id="@+id/tvSelectedLunch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/selected_lunch"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAddLunch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add"
+                            style="@style/Widget.Material3.Button.TonalButton"/>
+                    </LinearLayout>
 
-            <!-- Snack -->
-            <LinearLayout
+                    <TextView
+                        android:id="@+id/tvSelectedLunch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/selected_lunch"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Snack Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/snack"
-                    android:textSize="16sp" />
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <Button
-                    android:id="@+id/btnAddSnack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-            </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/snack"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
-            <TextView
-                android:id="@+id/tvSelectedSnack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/selected_snack"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAddSnack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add"
+                            style="@style/Widget.Material3.Button.TonalButton"/>
+                    </LinearLayout>
 
-            <!-- Dinner -->
-            <LinearLayout
+                    <TextView
+                        android:id="@+id/tvSelectedSnack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/selected_snack"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Dinner Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="8dp"
+                app:cardElevation="1dp">
 
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/dinner"
-                    android:textSize="16sp" />
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <Button
-                    android:id="@+id/btnAddDinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-            </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/dinner"
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
-            <TextView
-                android:id="@+id/tvSelectedDinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/selected_dinner"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAddDinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add"
+                            style="@style/Widget.Material3.Button.TonalButton"/>
+                    </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/tvSelectedDinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/selected_dinner"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <fragment
         android:id="@+id/bottom_nav_fragment"
         android:name="es.uma.foodcalendar.BottomNavFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
-</RelativeLayout>
+        android:layout_gravity="bottom"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
