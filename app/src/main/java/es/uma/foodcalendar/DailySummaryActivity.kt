@@ -39,20 +39,16 @@ class DailySummaryActivity : AppCompatActivity() {
             startActivityForResult(intent, REQUEST_CODE_SELECT_MEAL)
         }
 
-        findViewById<Button>(R.id.btnCreateBreakfast).setOnClickListener {
-            val intent = Intent(this, AddMealActivity::class.java)
-            startActivity(intent)
-        }
-
         findViewById<Button>(R.id.btnAddLunch).setOnClickListener {
             val intent = Intent(this, MealListActivity::class.java)
             intent.putExtra("mealType", "Lunch")
             startActivityForResult(intent, REQUEST_CODE_SELECT_MEAL)
         }
 
-        findViewById<Button>(R.id.btnCreateLunch).setOnClickListener {
-            val intent = Intent(this, AddMealActivity::class.java)
-            startActivity(intent)
+        findViewById<Button>(R.id.btnAddSnack).setOnClickListener {
+            val intent = Intent(this, MealListActivity::class.java)
+            intent.putExtra("mealType", "Snack")
+            startActivityForResult(intent, REQUEST_CODE_SELECT_MEAL)
         }
 
         findViewById<Button>(R.id.btnAddDinner).setOnClickListener {
@@ -60,44 +56,39 @@ class DailySummaryActivity : AppCompatActivity() {
             intent.putExtra("mealType", "Dinner")
             startActivityForResult(intent, REQUEST_CODE_SELECT_MEAL)
         }
-
-        findViewById<Button>(R.id.btnCreateDinner).setOnClickListener {
-            val intent = Intent(this, AddMealActivity::class.java)
-            startActivity(intent)
-        }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_SELECT_MEAL && resultCode == RESULT_OK) {
-            val selectedMeal = data?.getStringExtra("selectedMeal")
-            val mealType = data?.getStringExtra("mealType")
-            when (mealType) {
-                "Breakfast" -> {
-                    tvSelectedBreakfast.text = "Selected Breakfast: $selectedMeal"
-                    sharedPreferences.edit().putString("selectedBreakfast", selectedMeal).apply()
-                }
-                "Lunch" -> {
-                    tvSelectedLunch.text = "Selected Lunch: $selectedMeal"
-                    sharedPreferences.edit().putString("selectedLunch", selectedMeal).apply()
-                }
-                "Dinner" -> {
-                    tvSelectedDinner.text = "Selected Dinner: $selectedMeal"
-                    sharedPreferences.edit().putString("selectedDinner", selectedMeal).apply()
-                }
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    if (requestCode == REQUEST_CODE_SELECT_MEAL && resultCode == RESULT_OK) {
+        val selectedMeal = data?.getStringExtra("selectedMeal")
+        val mealType = data?.getStringExtra("mealType")
+        when (mealType) {
+            "Breakfast" -> {
+                tvSelectedBreakfast.text = if (selectedMeal != null) getString(R.string.selected_breakfast, selectedMeal) else ""
+                sharedPreferences.edit().putString("selectedBreakfast", selectedMeal).apply()
             }
-            updateCaloriesInfo()
+            "Lunch" -> {
+                tvSelectedLunch.text = if (selectedMeal != null) getString(R.string.selected_lunch, selectedMeal) else ""
+                sharedPreferences.edit().putString("selectedLunch", selectedMeal).apply()
+            }
+            "Dinner" -> {
+                tvSelectedDinner.text = if (selectedMeal != null) getString(R.string.selected_dinner, selectedMeal) else ""
+                sharedPreferences.edit().putString("selectedDinner", selectedMeal).apply()
+            }
         }
+        updateCaloriesInfo()
     }
+}
 
-    private fun updateCaloriesInfo() {
-        val caloriesConsumed = getCaloriesConsumed()
-        val calorieGoal = sharedPreferences.getInt("calorieGoal", 0)
-        val caloriesRemaining = calorieGoal - caloriesConsumed
+private fun updateCaloriesInfo() {
+    val caloriesConsumed = getCaloriesConsumed()
+    val calorieGoal = sharedPreferences.getInt("calorieGoal", 0)
+    val caloriesRemaining = calorieGoal - caloriesConsumed
 
-        tvCaloriesConsumed.text = "Calories Consumed: $caloriesConsumed"
-        tvCaloriesRemaining.text = "Calories Remaining: $caloriesRemaining"
-    }
+    tvCaloriesConsumed.text = getString(R.string.calories_consumed, caloriesConsumed)
+    tvCaloriesRemaining.text = getString(R.string.calories_remaining, caloriesRemaining)
+}
 
     private fun getCaloriesConsumed(): Int {
         val db = dbHelper.readableDatabase

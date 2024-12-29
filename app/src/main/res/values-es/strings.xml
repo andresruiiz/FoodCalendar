@@ -22,4 +22,23 @@
     <string name="statistics">Estadísticas</string>
     <string name="selected_date">Fecha seleccionada:</string>
     <string name="view_statistics">Ver estadísticas</string>
+    <string name="first_fragment_label">Primer Fragmento</string>
+    <string name="second_fragment_label">Segundo Fragmento</string>
+    <string name="next">Siguiente</string>
+    <string name="previous">Anterior</string>
+    <string name="title_activity_profile">PerfilActividad</string>
+    <string name="title_activity_daily_summary">ResumenDiarioActividad</string>
+    <string name="title_activity_calendar">CalendarioActividad</string>
+    <string name="title_activity_meal_list">ListaComidasActividad</string>
+    <string name="selected_breakfast">Desayuno seleccionado: %1$s</string>
+    <string name="selected_lunch">Almuerzo seleccionado: %1$s</string>
+    <string name="selected_dinner">Cena seleccionada: %1$s</string>
+    <string name="selected_snack">Merienda seleccionada: %1$s</string>
+    <string name="calories_consumed">Calorías consumidas: %1$d</string>
+    <string name="calories_remaining">Calorías restantes: %1$d</string>
+    <string name="breakfast">Desayuno</string>
+    <string name="lunch">Almuerzo</string>
+    <string name="dinner">Cena</string>
+    <string name="snack">Merienda</string>
+    <string name="add">Añadir</string>
 </resources>
