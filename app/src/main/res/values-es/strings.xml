@@ -45,4 +45,6 @@
     <string name="selected_date">Fecha seleccionada: %1$s</string>
     <string name="no_meals_for_date">No hay comidas registradas para esta fecha.</string>
     <string name="total_calories">Calorías Totales: %1$d kcal</string>
+    <string name="add_new_food">Añadir nuevo alimento</string>
+    <string name="select_a_food">Selecciona un alimento</string>
 </resources>

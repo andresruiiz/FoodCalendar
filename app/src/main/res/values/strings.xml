@@ -45,4 +45,6 @@
     <string name="selected_date">Selected Date: %1$s</string>
     <string name="no_meals_for_date">No meals recorded for this date.</string>
     <string name="total_calories">Total Calories: %1$d kcal</string>
+    <string name="add_new_food">Add new food</string>
+    <string name="select_a_food">Select a Food</string>
 </resources>
