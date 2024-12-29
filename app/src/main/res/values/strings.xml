@@ -42,4 +42,5 @@
     <string name="dinner">Dinner</string>
     <string name="snack">Snack</string>
     <string name="add">Add</string>
+    <string name="no_meals">No meals</string>
 </resources>

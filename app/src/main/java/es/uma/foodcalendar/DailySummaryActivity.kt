@@ -73,11 +73,13 @@ class DailySummaryActivity : AppCompatActivity() {
             textView.text = getString(R.string.no_meals)
         } else {
             val mealDescriptions = meals.joinToString("\n") { meal ->
-                "${meal.name}: ${meal.calories} kcal"
+                // Mostramos el nombre del alimento y sus calorías totales
+                "${meal.name}: ${meal.calories} kcal (${meal.quantity}x)"
             }
             textView.text = mealDescriptions
         }
     }
+
 
     private fun addMeal(timeOfDay: String) {
         // Lanza una nueva actividad para seleccionar un alimento

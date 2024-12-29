@@ -42,4 +42,5 @@
     <string name="dinner">Cena</string>
     <string name="snack">Merienda</string>
     <string name="add">Añadir</string>
+    <string name="no_meals">Sin comidas</string>
 </resources>
