@@ -1,123 +1,89 @@
 package es.uma.foodcalendar
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DailySummaryActivity : AppCompatActivity() {
-    private val REQUEST_CODE_SELECT_MEAL = 1
-    private lateinit var tvSelectedBreakfast: TextView
-    private lateinit var tvSelectedLunch: TextView
-    private lateinit var tvSelectedDinner: TextView
-    private lateinit var tvCaloriesConsumed: TextView
-    private lateinit var tvCaloriesRemaining: TextView
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var repository: FoodCalendarRepository
+    private lateinit var currentDate: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_daily_summary)
 
-        sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE)
-        dbHelper = DatabaseHelper(this)
+        repository = FoodCalendarRepository(this)
 
-        tvCaloriesConsumed = findViewById(R.id.tvCaloriesConsumed)
-        tvCaloriesRemaining = findViewById(R.id.tvCaloriesRemaining)
-        tvSelectedBreakfast = findViewById(R.id.tvSelectedBreakfast)
-        tvSelectedLunch = findViewById(R.id.tvSelectedLunch)
-        tvSelectedDinner = findViewById(R.id.tvSelectedDinner)
+        // Obtener la fecha actual
+        currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
-        updateCaloriesInfo()
+        // Inicializar vistas
+        val tvCaloriesConsumed = findViewById<TextView>(R.id.tvCaloriesConsumed)
+        val tvCaloriesRemaining = findViewById<TextView>(R.id.tvCaloriesRemaining)
 
-        findViewById<Button>(R.id.btnAddBreakfast).setOnClickListener {
-            val intent = Intent(this, MealListActivity::class.java)
-            intent.putExtra("mealType", "Breakfast")
-            startActivityForResult(intent, REQUEST_CODE_SELECT_MEAL)
+        val tvSelectedBreakfast = findViewById<TextView>(R.id.tvSelectedBreakfast)
+        val tvSelectedLunch = findViewById<TextView>(R.id.tvSelectedLunch)
+        val tvSelectedSnack = findViewById<TextView>(R.id.tvSelectedSnack)
+        val tvSelectedDinner = findViewById<TextView>(R.id.tvSelectedDinner)
+
+        val btnAddBreakfast = findViewById<Button>(R.id.btnAddBreakfast)
+        val btnAddLunch = findViewById<Button>(R.id.btnAddLunch)
+        val btnAddSnack = findViewById<Button>(R.id.btnAddSnack)
+        val btnAddDinner = findViewById<Button>(R.id.btnAddDinner)
+
+        // Mostrar resumen de calorías
+        updateCalorieSummary(tvCaloriesConsumed, tvCaloriesRemaining)
+
+        // Cargar comidas por franja horaria
+        updateSelectedMeals("breakfast", tvSelectedBreakfast)
+        updateSelectedMeals("lunch", tvSelectedLunch)
+        updateSelectedMeals("snack", tvSelectedSnack)
+        updateSelectedMeals("dinner", tvSelectedDinner)
+
+        // Botones para añadir comidas
+        btnAddBreakfast.setOnClickListener { addMeal("breakfast") }
+        btnAddLunch.setOnClickListener { addMeal("lunch") }
+        btnAddSnack.setOnClickListener { addMeal("snack") }
+        btnAddDinner.setOnClickListener { addMeal("dinner") }
+    }
+
+    private fun updateCalorieSummary(tvConsumed: TextView, tvRemaining: TextView) {
+        val meals = repository.getMealsByDate(currentDate)
+        var totalCaloriesConsumed = 0
+
+        for (meal in meals) {
+            totalCaloriesConsumed += meal.calories
         }
 
-        findViewById<Button>(R.id.btnAddLunch).setOnClickListener {
-            val intent = Intent(this, MealListActivity::class.java)
-            intent.putExtra("mealType", "Lunch")
-            startActivityForResult(intent, REQUEST_CODE_SELECT_MEAL)
-        }
+        val calorieGoal = getSharedPreferences("UserData", MODE_PRIVATE)
+            .getInt("calorieGoal", 2000) // Default to 2000 kcal
 
-        findViewById<Button>(R.id.btnAddSnack).setOnClickListener {
-            val intent = Intent(this, MealListActivity::class.java)
-            intent.putExtra("mealType", "Snack")
-            startActivityForResult(intent, REQUEST_CODE_SELECT_MEAL)
-        }
+        tvConsumed.text = getString(R.string.calories_consumed, totalCaloriesConsumed)
+        tvRemaining.text = getString(R.string.calories_remaining, calorieGoal - totalCaloriesConsumed)
+    }
 
-        findViewById<Button>(R.id.btnAddDinner).setOnClickListener {
-            val intent = Intent(this, MealListActivity::class.java)
-            intent.putExtra("mealType", "Dinner")
-            startActivityForResult(intent, REQUEST_CODE_SELECT_MEAL)
+    private fun updateSelectedMeals(timeOfDay: String, textView: TextView) {
+        val meals = repository.getMealsByDateAndTime(currentDate, timeOfDay)
+        if (meals.isEmpty()) {
+            textView.text = getString(R.string.no_meals)
+        } else {
+            val mealDescriptions = meals.joinToString("\n") { meal ->
+                "${meal.name}: ${meal.calories} kcal"
+            }
+            textView.text = mealDescriptions
         }
     }
 
-override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
-    if (requestCode == REQUEST_CODE_SELECT_MEAL && resultCode == RESULT_OK) {
-        val selectedMeal = data?.getStringExtra("selectedMeal")
-        val mealType = data?.getStringExtra("mealType")
-        when (mealType) {
-            "Breakfast" -> {
-                tvSelectedBreakfast.text = if (selectedMeal != null) getString(R.string.selected_breakfast, selectedMeal) else ""
-                sharedPreferences.edit().putString("selectedBreakfast", selectedMeal).apply()
-            }
-            "Lunch" -> {
-                tvSelectedLunch.text = if (selectedMeal != null) getString(R.string.selected_lunch, selectedMeal) else ""
-                sharedPreferences.edit().putString("selectedLunch", selectedMeal).apply()
-            }
-            "Dinner" -> {
-                tvSelectedDinner.text = if (selectedMeal != null) getString(R.string.selected_dinner, selectedMeal) else ""
-                sharedPreferences.edit().putString("selectedDinner", selectedMeal).apply()
-            }
-        }
-        updateCaloriesInfo()
-    }
-}
-
-private fun updateCaloriesInfo() {
-    val caloriesConsumed = getCaloriesConsumed()
-    val calorieGoal = sharedPreferences.getInt("calorieGoal", 0)
-    val caloriesRemaining = calorieGoal - caloriesConsumed
-
-    tvCaloriesConsumed.text = getString(R.string.calories_consumed, caloriesConsumed)
-    tvCaloriesRemaining.text = getString(R.string.calories_remaining, caloriesRemaining)
-}
-
-    private fun getCaloriesConsumed(): Int {
-        val db = dbHelper.readableDatabase
-        var totalCalories = 0
-
-        val selectedBreakfast = sharedPreferences.getString("selectedBreakfast", null)
-        val selectedLunch = sharedPreferences.getString("selectedLunch", null)
-        val selectedDinner = sharedPreferences.getString("selectedDinner", null)
-
-        if (selectedBreakfast != null) {
-            totalCalories += getMealCalories(db, selectedBreakfast)
-        }
-        if (selectedLunch != null) {
-            totalCalories += getMealCalories(db, selectedLunch)
-        }
-        if (selectedDinner != null) {
-            totalCalories += getMealCalories(db, selectedDinner)
-        }
-
-        return totalCalories
-    }
-
-    private fun getMealCalories(db: SQLiteDatabase, mealName: String): Int {
-        val cursor = db.rawQuery("SELECT ${DatabaseHelper.COLUMN_CALORIES} FROM ${DatabaseHelper.TABLE_MEALS} WHERE ${DatabaseHelper.COLUMN_NAME} = ?", arrayOf(mealName))
-        var calories = 0
-        if (cursor.moveToFirst()) {
-            calories = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_CALORIES))
-        }
-        cursor.close()
-        return calories
+    private fun addMeal(timeOfDay: String) {
+        // Lanza una nueva actividad para seleccionar un alimento
+        val intent = Intent(this, AddMealActivity::class.java)
+        intent.putExtra("timeOfDay", timeOfDay)
+        intent.putExtra("date", currentDate)
+        startActivity(intent)
     }
 }

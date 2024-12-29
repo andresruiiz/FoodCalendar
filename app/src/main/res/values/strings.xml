@@ -7,8 +7,9 @@
     <string name="height">Height (cm)</string>
     <string name="calorie_goal">Calorie Goal</string>
     <string name="save">Save</string>
-    <string name="add_meal">Add a Meal</string>
-    <string name="meal_name">Meal Name</string>
+    <string name="add_food">Add Food</string>
+    <string name="introduce_details">Introduce the details</string>
+    <string name="food_name">Food Name</string>
     <string name="calories">Calories</string>
     <string name="protein">Protein (g)</string>
     <string name="fat">Fat (g)</string>

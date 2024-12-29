@@ -7,8 +7,9 @@
     <string name="height">Altura (cm)</string>
     <string name="calorie_goal">Objetivo calórico</string>
     <string name="save">Guardar</string>
-    <string name="add_meal">Añadir una comida</string>
-    <string name="meal_name">Nombre de la comida</string>
+    <string name="add_food">Añadir alimento</string>
+    <string name="introduce_details">Introduce los detalles</string>
+    <string name="food_name">Nombre del alimento</string>
     <string name="calories">Calorías</string>
     <string name="protein">Proteínas (g)</string>
     <string name="fat">Grasas (g)</string>

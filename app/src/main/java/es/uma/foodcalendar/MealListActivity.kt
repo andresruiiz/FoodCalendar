@@ -43,7 +43,7 @@ class MealListActivity : AppCompatActivity() {
         }
 
         fabAddMeal.setOnClickListener {
-            val intent = Intent(this, AddMealActivity::class.java)
+            val intent = Intent(this, AddFoodActivity::class.java)
             startActivity(intent)
         }
     }

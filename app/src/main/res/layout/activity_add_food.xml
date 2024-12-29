@@ -7,69 +7,52 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/addMealTitle"
+        android:id="@+id/welcomeMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_meal"
+        android:text="@string/introduce_details"
         android:textSize="18sp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dp" />
 
     <EditText
-        android:id="@+id/mealNameInput"
+        android:id="@+id/foodNameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/meal_name" />
+        android:hint="@string/food_name" />
 
     <EditText
-        android:id="@+id/calorieInput"
+        android:id="@+id/foodCaloriesInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/calories"
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/proteinInput"
+        android:id="@+id/foodProteinInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/protein"
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/fatInput"
+        android:id="@+id/foodFatInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/fat"
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/carbsInput"
+        android:id="@+id/foodCarbsInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/carbs"
         android:inputType="number" />
 
-    <Spinner
-        android:id="@+id/mealCategorySpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:entries="@array/meal_categories" />
-
     <Button
-        android:id="@+id/saveMealButton"
+        android:id="@+id/saveFoodButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:layout_marginTop="20dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_profile"
-        android:visibility="gone" />
-
+        android:text="@string/add_food"
+        android:layout_marginTop="16dp" />
 </LinearLayout>
