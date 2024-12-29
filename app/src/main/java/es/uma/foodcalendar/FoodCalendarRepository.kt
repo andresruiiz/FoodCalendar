@@ -75,55 +75,65 @@ class FoodCalendarRepository(context: Context) {
     fun getMealsByDate(date: String): List<Meal> {
         val db = dbHelper.readableDatabase
         val query = """
-        SELECT m.id, f.name, f.calories, m.quantity, m.time_of_day, m.date
+        SELECT m.${BaseColumns._ID}, f.${FoodCalendarContract.Foods.COLUMN_NAME}, 
+               f.${FoodCalendarContract.Foods.COLUMN_CALORIES}, 
+               m.${FoodCalendarContract.Meals.COLUMN_QUANTITY}, 
+               m.${FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY}, 
+               m.${FoodCalendarContract.Meals.COLUMN_DATE}
         FROM ${FoodCalendarContract.Meals.TABLE_NAME} m
         JOIN ${FoodCalendarContract.Foods.TABLE_NAME} f
         ON m.${FoodCalendarContract.Meals.COLUMN_FOOD_ID} = f.${BaseColumns._ID}
         WHERE m.${FoodCalendarContract.Meals.COLUMN_DATE} = ?
-        """
+    """
         val cursor = db.rawQuery(query, arrayOf(date))
         val meals = mutableListOf<Meal>()
 
         while (cursor.moveToNext()) {
-            val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
-            val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
-            val calories = cursor.getInt(cursor.getColumnIndexOrThrow("calories"))
-            val quantity = cursor.getInt(cursor.getColumnIndexOrThrow("quantity"))
-            val time = cursor.getString(cursor.getColumnIndexOrThrow("time_of_day"))
-            val mealDate = cursor.getString(cursor.getColumnIndexOrThrow("date"))
+            val id = cursor.getLong(cursor.getColumnIndexOrThrow(BaseColumns._ID))
+            val name = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_NAME))
+            val calories = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_CALORIES))
+            val quantity = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_QUANTITY))
+            val time = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY))
+            val mealDate = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_DATE))
 
             meals.add(Meal(id, name, calories * quantity, quantity, time, mealDate))
         }
         cursor.close()
         return meals
     }
+
 
 
     fun getMealsByDateAndTime(date: String, timeOfDay: String): List<Meal> {
         val db = dbHelper.readableDatabase
         val query = """
-        SELECT m.id, f.name, f.calories, m.quantity, m.time_of_day, m.date
+        SELECT m.${BaseColumns._ID}, f.${FoodCalendarContract.Foods.COLUMN_NAME}, 
+               f.${FoodCalendarContract.Foods.COLUMN_CALORIES}, 
+               m.${FoodCalendarContract.Meals.COLUMN_QUANTITY}, 
+               m.${FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY}, 
+               m.${FoodCalendarContract.Meals.COLUMN_DATE}
         FROM ${FoodCalendarContract.Meals.TABLE_NAME} m
         JOIN ${FoodCalendarContract.Foods.TABLE_NAME} f
         ON m.${FoodCalendarContract.Meals.COLUMN_FOOD_ID} = f.${BaseColumns._ID}
         WHERE m.${FoodCalendarContract.Meals.COLUMN_DATE} = ? 
         AND m.${FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY} = ?
-        """
+    """
         val cursor = db.rawQuery(query, arrayOf(date, timeOfDay))
         val meals = mutableListOf<Meal>()
 
         while (cursor.moveToNext()) {
-            val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
-            val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
-            val calories = cursor.getInt(cursor.getColumnIndexOrThrow("calories"))
-            val quantity = cursor.getInt(cursor.getColumnIndexOrThrow("quantity"))
-            val time = cursor.getString(cursor.getColumnIndexOrThrow("time_of_day"))
-            val mealDate = cursor.getString(cursor.getColumnIndexOrThrow("date"))
+            val id = cursor.getLong(cursor.getColumnIndexOrThrow(BaseColumns._ID))
+            val name = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_NAME))
+            val calories = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_CALORIES))
+            val quantity = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_QUANTITY))
+            val time = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY))
+            val mealDate = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_DATE))
 
             meals.add(Meal(id, name, calories * quantity, quantity, time, mealDate))
         }
         cursor.close()
         return meals
     }
+
 
 }

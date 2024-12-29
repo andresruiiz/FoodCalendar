@@ -20,8 +20,6 @@
         <item>Dinner</item>
         <item>Snack</item>
     </string-array>
-    <string name="statistics">Statistics</string>
-    <string name="selected_date">Selected Date:</string>
     <string name="view_statistics">View Statistics</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -43,4 +41,8 @@
     <string name="snack">Snack</string>
     <string name="add">Add</string>
     <string name="no_meals">No meals</string>
+    <string name="statistics">Statistics</string>
+    <string name="selected_date">Selected Date: %1$s</string>
+    <string name="no_meals_for_date">No meals recorded for this date.</string>
+    <string name="total_calories">Total Calories: %1$d kcal</string>
 </resources>

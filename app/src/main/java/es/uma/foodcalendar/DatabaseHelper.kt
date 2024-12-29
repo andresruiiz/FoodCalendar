@@ -17,33 +17,33 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        // Crear tabla foods
         val createFoodsTable = """
-            CREATE TABLE ${FoodCalendarContract.Foods.TABLE_NAME} (
-                ${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,
-                ${FoodCalendarContract.Foods.COLUMN_NAME} TEXT,
-                ${FoodCalendarContract.Foods.COLUMN_CALORIES} INTEGER,
-                ${FoodCalendarContract.Foods.COLUMN_PROTEIN} INTEGER,
-                ${FoodCalendarContract.Foods.COLUMN_FAT} INTEGER,
-                ${FoodCalendarContract.Foods.COLUMN_CARBS} INTEGER
-            )
-        """
+        CREATE TABLE ${FoodCalendarContract.Foods.TABLE_NAME} (
+            ${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,
+            ${FoodCalendarContract.Foods.COLUMN_NAME} TEXT,
+            ${FoodCalendarContract.Foods.COLUMN_CALORIES} INTEGER,
+            ${FoodCalendarContract.Foods.COLUMN_PROTEIN} INTEGER,
+            ${FoodCalendarContract.Foods.COLUMN_FAT} INTEGER,
+            ${FoodCalendarContract.Foods.COLUMN_CARBS} INTEGER
+        )
+    """
         db.execSQL(createFoodsTable)
 
-        // Crear tabla meals
         val createMealsTable = """
-            CREATE TABLE ${FoodCalendarContract.Meals.TABLE_NAME} (
-                ${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,
-                ${FoodCalendarContract.Meals.COLUMN_FOOD_ID} INTEGER,
-                ${FoodCalendarContract.Meals.COLUMN_DATE} TEXT,
-                ${FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY} TEXT,
-                ${FoodCalendarContract.Meals.COLUMN_QUANTITY} INTEGER,
-                FOREIGN KEY(${FoodCalendarContract.Meals.COLUMN_FOOD_ID}) 
-                REFERENCES ${FoodCalendarContract.Foods.TABLE_NAME}(${BaseColumns._ID})
-            )
-        """
+        CREATE TABLE ${FoodCalendarContract.Meals.TABLE_NAME} (
+            ${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,
+            ${FoodCalendarContract.Meals.COLUMN_FOOD_ID} INTEGER,
+            ${FoodCalendarContract.Meals.COLUMN_DATE} TEXT,
+            ${FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY} TEXT,
+            ${FoodCalendarContract.Meals.COLUMN_QUANTITY} INTEGER,
+            FOREIGN KEY(${FoodCalendarContract.Meals.COLUMN_FOOD_ID}) 
+            REFERENCES ${FoodCalendarContract.Foods.TABLE_NAME}(${BaseColumns._ID})
+        )
+    """
         db.execSQL(createMealsTable)
     }
+
+
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS ${FoodCalendarContract.Meals.TABLE_NAME}")

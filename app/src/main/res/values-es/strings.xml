@@ -20,8 +20,6 @@
         <item>Cena</item>
         <item>Merienda</item>
     </string-array>
-    <string name="statistics">Estadísticas</string>
-    <string name="selected_date">Fecha seleccionada:</string>
     <string name="view_statistics">Ver estadísticas</string>
     <string name="first_fragment_label">Primer Fragmento</string>
     <string name="second_fragment_label">Segundo Fragmento</string>
@@ -43,4 +41,8 @@
     <string name="snack">Merienda</string>
     <string name="add">Añadir</string>
     <string name="no_meals">Sin comidas</string>
+    <string name="statistics">Estadísticas</string>
+    <string name="selected_date">Fecha seleccionada: %1$s</string>
+    <string name="no_meals_for_date">No hay comidas registradas para esta fecha.</string>
+    <string name="total_calories">Calorías Totales: %1$d kcal</string>
 </resources>

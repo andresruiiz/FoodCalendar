@@ -1,7 +1,5 @@
 package es.uma.foodcalendar
 
-import android.annotation.SuppressLint
-import android.database.Cursor
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -9,76 +7,67 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class StatisticsActivity : AppCompatActivity() {
-    @SuppressLint("Range")
+    private lateinit var repository: FoodCalendarRepository
+    private lateinit var calendarView: CalendarView
+    private lateinit var selectedDateLabel: TextView
+    private lateinit var mealsListView: ListView
+    private lateinit var totalCalories: TextView
+
+    private var selectedDate: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistics)
 
-        val calendarView = findViewById<CalendarView>(R.id.calendarView)
-        val selectedDateLabel = findViewById<TextView>(R.id.selectedDateLabel)
-        val mealsListView = findViewById<ListView>(R.id.mealsListView)
+        repository = FoodCalendarRepository(this)
 
-        val dbHelper = DatabaseHelper(this)
-        val db = dbHelper.readableDatabase
+        // Inicializar vistas
+        calendarView = findViewById(R.id.calendarView)
+        selectedDateLabel = findViewById(R.id.selectedDateLabel)
+        mealsListView = findViewById(R.id.mealsListView)
+        totalCalories = findViewById(R.id.totalCalories)
 
-        // Formato de fecha
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        // Configurar fecha inicial
+        selectedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        selectedDateLabel.text = getString(R.string.selected_date, selectedDate)
 
-        // Cambia la fecha seleccionada
+        // Mostrar comidas para la fecha inicial
+        loadMealsForDate(selectedDate)
+
+        // Cambiar la fecha al seleccionar en el calendario
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val selectedDate = dateFormat.format(
-                GregorianCalendar(year, month, dayOfMonth).time
-            )
-            selectedDateLabel.text = getString(R.string.selected_date) + " " + selectedDate
+            selectedDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
+            selectedDateLabel.text = getString(R.string.selected_date, selectedDate)
+            loadMealsForDate(selectedDate)
+        }
+    }
 
-            // Cargar las comidas del día seleccionado
-            val query = """
-                SELECT * FROM ${DatabaseHelper.TABLE_MEALS} 
-                WHERE ${DatabaseHelper.COLUMN_DATE} = ?
-            """
-            val cursor: Cursor = db.rawQuery(query, arrayOf(selectedDate))
-            val meals = mutableListOf<String>()
+    private fun loadMealsForDate(date: String) {
+        // Obtener las comidas del día
+        val meals = repository.getMealsByDate(date)
 
-            while (cursor.moveToNext()) {
-                val name = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_NAME))
-                val calories = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_CALORIES))
-                val protein = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_PROTEIN))
-                val fat = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_FAT))
-                val carbs = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_CARBS))
-                meals.add("$name - $calories kcal, $protein g Protein, $fat g Fat, $carbs g Carbs")
+        if (meals.isEmpty()) {
+            Toast.makeText(this, getString(R.string.no_meals_for_date), Toast.LENGTH_SHORT).show()
+            mealsListView.adapter = null
+            totalCalories.text = getString(R.string.total_calories, 0)
+            return
+        }
+
+        // Agrupar por franja horaria y mostrar
+        val groupedMeals = meals.groupBy { it.timeOfDay }
+        val mealDescriptions = groupedMeals.map { (timeOfDay, meals) ->
+            val totalCaloriesForTime = meals.sumOf { it.calories }
+            val mealDetails = meals.joinToString("\n") { meal ->
+                "- ${meal.name}: ${meal.calories} kcal (${meal.quantity}x)"
             }
-            cursor.close()
-
-            // Mostrar las comidas en la lista
-            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, meals)
-            mealsListView.adapter = adapter
+            "${timeOfDay.capitalize()}:\n$totalCaloriesForTime kcal\n$mealDetails"
         }
 
-        // Inicializar con la fecha actual
-        val todayDate = dateFormat.format(Date())
-        calendarView.date = Date().time
-        selectedDateLabel.text = getString(R.string.selected_date) + " " + todayDate
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, mealDescriptions)
+        mealsListView.adapter = adapter
 
-        // Cargar las comidas del día actual
-        val initialQuery = """
-            SELECT * FROM ${DatabaseHelper.TABLE_MEALS} 
-            WHERE ${DatabaseHelper.COLUMN_DATE} = ?
-        """
-        val initialCursor: Cursor = db.rawQuery(initialQuery, arrayOf(todayDate))
-        val initialMeals = mutableListOf<String>()
-
-        while (initialCursor.moveToNext()) {
-            val name = initialCursor.getString(initialCursor.getColumnIndex(DatabaseHelper.COLUMN_NAME))
-            val calories = initialCursor.getInt(initialCursor.getColumnIndex(DatabaseHelper.COLUMN_CALORIES))
-            val protein = initialCursor.getInt(initialCursor.getColumnIndex(DatabaseHelper.COLUMN_PROTEIN))
-            val fat = initialCursor.getInt(initialCursor.getColumnIndex(DatabaseHelper.COLUMN_FAT))
-            val carbs = initialCursor.getInt(initialCursor.getColumnIndex(DatabaseHelper.COLUMN_CARBS))
-            initialMeals.add("$name - $calories kcal, $protein g Protein, $fat g Fat, $carbs g Carbs")
-        }
-        initialCursor.close()
-
-        // Mostrar las comidas del día actual
-        val initialAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, initialMeals)
-        mealsListView.adapter = initialAdapter
+        // Calcular el total de calorías del día
+        val totalCaloriesForDay = meals.sumOf { it.calories }
+        totalCalories.text = getString(R.string.total_calories, totalCaloriesForDay)
     }
 }

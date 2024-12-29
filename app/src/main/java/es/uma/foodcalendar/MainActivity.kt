@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
         val statsButton = findViewById<Button>(R.id.statsButton)
         statsButton.setOnClickListener {
-            val intent = Intent(this, CalendarActivity::class.java)
+            val intent = Intent(this, StatisticsActivity::class.java)
             startActivity(intent)
         }
 
