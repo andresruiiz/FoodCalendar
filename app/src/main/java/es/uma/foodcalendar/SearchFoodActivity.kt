@@ -37,8 +37,20 @@ class SearchFoodActivity : AppCompatActivity() {
         }
 
         lvSearchResults.setOnItemClickListener { _, _, position, _ ->
-            val selectedFood = lvSearchResults.adapter.getItem(position) as Food
-            saveFoodToDatabase(selectedFood)
+            val selectedFood = lvSearchResults.adapter.getItem(position) as FoodSearchResult
+
+            repository.addFood(
+                name = selectedFood.name,
+                calories = selectedFood.calories,
+                protein = selectedFood.protein,
+                fat = selectedFood.fat,
+                carbs = selectedFood.carbs
+            )
+            Toast.makeText(this, "Food added successfully!", Toast.LENGTH_SHORT).show()
+
+            // Enviar resultado a AddMealActivity
+            setResult(Activity.RESULT_OK)
+            finish()
         }
     }
 
@@ -61,7 +73,7 @@ class SearchFoodActivity : AppCompatActivity() {
                     val json = JSONObject(responseBody.string())
                     val products = json.optJSONArray("products") ?: return
 
-                    val foods = mutableListOf<Food>()
+                    val foods = mutableListOf<FoodSearchResult>()
                     for (i in 0 until products.length()) {
                         val product = products.optJSONObject(i) ?: continue
                         val name = product.optString("product_name", "Unknown")
@@ -69,16 +81,18 @@ class SearchFoodActivity : AppCompatActivity() {
                         val protein = product.optJSONObject("nutriments")?.optInt("proteins_100g", 0) ?: 0
                         val fat = product.optJSONObject("nutriments")?.optInt("fat_100g", 0) ?: 0
                         val carbs = product.optJSONObject("nutriments")?.optInt("carbohydrates_100g", 0) ?: 0
+                        val imageUrl = product.optString("image_url", "")
 
-                        foods.add(Food(0, name, calories, protein, fat, carbs))
+                        foods.add(FoodSearchResult(name, calories, protein, fat, carbs, imageUrl))
                     }
 
                     runOnUiThread {
-                        val adapter = ArrayAdapter(this@SearchFoodActivity, android.R.layout.simple_list_item_1, foods.map { it.name })
+                        val adapter = FoodSearchAdapter(this@SearchFoodActivity, foods)
                         lvSearchResults.adapter = adapter
                     }
                 }
             }
+
         })
     }
 

@@ -91,6 +91,7 @@ class AddMealActivity : AppCompatActivity() {
     }
 
 
+
     companion object {
         const val ADD_FOOD_REQUEST_CODE = 1
         const val SEARCH_FOOD_REQUEST_CODE = 1
