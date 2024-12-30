@@ -36,46 +36,40 @@ class AddMealActivity : AppCompatActivity() {
         // Cargar alimentos desde la base de datos
         loadFoods()
 
-        // Seleccionar un alimento de la lista
-        foodListView.setOnItemClickListener { _, _, position, _ ->
-            selectedFood = foods[position]
-            adapter.setSelectedPosition(position) // Resaltar el elemento seleccionado
-        }
-
         // Añadir una comida con la cantidad especificada
         btnAddMeal.setOnClickListener {
-    val food = selectedFood
-    if (food == null) {
-        Toast.makeText(this, getString(R.string.please_select_food), Toast.LENGTH_SHORT).show()
-        return@setOnClickListener
-    }
+            val food = selectedFood
+            if (food == null) {
+                Toast.makeText(this, getString(R.string.please_select_food), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-    val quantity = etFoodQuantity.text.toString().toIntOrNull()
-    if (quantity == null || quantity <= 0) {
-        Toast.makeText(this, getString(R.string.please_enter_valid_quantity), Toast.LENGTH_SHORT).show()
-        return@setOnClickListener
-    }
+            val quantity = etFoodQuantity.text.toString().toIntOrNull()
+            if (quantity == null || quantity <= 0) {
+                Toast.makeText(this, getString(R.string.please_enter_valid_quantity), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-    AlertDialog.Builder(this)
-        .setTitle(R.string.confirmation)
-        .setMessage(R.string.confirm_save_meal)
-        .setPositiveButton(R.string.yes) { dialog, which ->
-            // Calcular calorías según la cantidad en gramos
-            val totalCalories = food.calories * quantity / 100
+            AlertDialog.Builder(this)
+                .setTitle(R.string.confirmation)
+                .setMessage(R.string.confirm_save_meal)
+                .setPositiveButton(R.string.yes) { dialog, which ->
+                    // Calcular calorías según la cantidad en gramos
+                    val totalCalories = food.calories * quantity / 100
 
-            repository.addMeal(
-                foodId = food.id,
-                date = date,
-                timeOfDay = timeOfDay,
-                quantity = quantity
-            )
-            Toast.makeText(this, getString(R.string.added_food, quantity, food.name, totalCalories), Toast.LENGTH_SHORT).show()
-            setResult(Activity.RESULT_OK)
-            finish()
+                    repository.addMeal(
+                        foodId = food.id,
+                        date = date,
+                        timeOfDay = timeOfDay,
+                        quantity = quantity
+                    )
+                    Toast.makeText(this, getString(R.string.added_food, quantity, food.name, totalCalories), Toast.LENGTH_SHORT).show()
+                    setResult(Activity.RESULT_OK)
+                    finish()
+                }
+                .setNegativeButton(R.string.no, null)
+                .show()
         }
-        .setNegativeButton(R.string.no, null)
-        .show()
-}
 
         // Botón para añadir un nuevo alimento
         btnAddNewFood.setOnClickListener {
@@ -94,6 +88,23 @@ class AddMealActivity : AppCompatActivity() {
         foods = repository.getAllFoods()
         adapter = FoodListAdapter(this, foods)
         foodListView.adapter = adapter
+    }
+
+    fun deleteFood(food: Food) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.confirmation)
+            .setMessage(getString(R.string.confirm_delete_food, food.name))
+            .setPositiveButton(R.string.yes) { dialog, which ->
+                repository.deleteFood(food.id)
+                loadFoods()
+                Toast.makeText(this, getString(R.string.food_deleted), Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton(R.string.no, null)
+            .show()
+    }
+
+    fun selectFood(food: Food) {
+        selectedFood = food
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

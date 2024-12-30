@@ -86,4 +86,7 @@
     <string name="confirm_save_meal">¿Estás seguro de que deseas guardar esta comida?</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
+    <string name="delete">Eliminar</string>
+    <string name="confirm_delete_food">¿Estás seguro de que deseas borrar %1$s?</string>
+    <string name="food_deleted">Alimento borrado correctamente</string>
 </resources>

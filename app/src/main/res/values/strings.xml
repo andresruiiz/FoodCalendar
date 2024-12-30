@@ -86,4 +86,7 @@
     <string name="confirm_save_meal">Are you sure you want to save this meal?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="delete">Delete</string>
+    <string name="confirm_delete_food">Are you sure you want to delete %1$s?</string>
+    <string name="food_deleted">Food deleted successfully</string>
 </resources>

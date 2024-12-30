@@ -59,6 +59,14 @@ class FoodCalendarRepository(context: Context) {
         return food
     }
 
+    fun deleteFood(id: Long) {
+        val db = dbHelper.writableDatabase
+        db.delete(
+            FoodCalendarContract.Foods.TABLE_NAME,
+            "${BaseColumns._ID} = ?",
+            arrayOf(id.toString())
+        )
+    }
 
     fun addMeal(foodId: Long, date: String, timeOfDay: String, quantity: Int): Long {
         val db = dbHelper.writableDatabase

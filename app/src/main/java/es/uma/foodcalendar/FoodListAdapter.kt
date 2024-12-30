@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 
@@ -28,6 +29,7 @@ class FoodListAdapter(
         val tvFoodProteins = view.findViewById<TextView>(R.id.tvFoodProteins)
         val tvFoodFats = view.findViewById<TextView>(R.id.tvFoodFats)
         val tvFoodCarbs = view.findViewById<TextView>(R.id.tvFoodCarbs)
+        val btnDelete = view.findViewById<Button>(R.id.btnDelete)
 
         val food = getItem(position)
 
@@ -37,6 +39,10 @@ class FoodListAdapter(
         tvFoodFats.text = context.getString(R.string.fats_per_100g, food.fat)
         tvFoodCarbs.text = context.getString(R.string.carbs_per_100g, food.carbs)
 
+        btnDelete.setOnClickListener {
+            (context as AddMealActivity).deleteFood(food)
+        }
+
         // Resaltar el elemento si está seleccionado
         if (position == selectedPosition) {
             view.setBackgroundColor(ContextCompat.getColor(context, R.color.selected_item_background))
@@ -44,9 +50,15 @@ class FoodListAdapter(
             view.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
         }
 
+        // Manejar la selección del elemento
+        view.setOnClickListener {
+            selectedPosition = position
+            (context as AddMealActivity).selectFood(food)
+            notifyDataSetChanged()
+        }
+
         return view
     }
-
 
     fun setSelectedPosition(position: Int) {
         selectedPosition = position
