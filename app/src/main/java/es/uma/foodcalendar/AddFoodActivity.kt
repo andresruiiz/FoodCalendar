@@ -1,6 +1,7 @@
 package es.uma.foodcalendar
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -27,12 +28,19 @@ class AddFoodActivity : AppCompatActivity() {
             val carbs = foodCarbsInput.text.toString().toIntOrNull() ?: 0
 
             if (name.isNotEmpty() && calories > 0) {
-                repository.addFood(name, calories, protein, fat, carbs)
-                Toast.makeText(this, R.string.food_added, Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(this)
+                    .setTitle(R.string.confirmation)
+                    .setMessage(R.string.confirm_save_food)
+                    .setPositiveButton(R.string.yes) { dialog, which ->
+                        repository.addFood(name, calories, protein, fat, carbs)
+                        Toast.makeText(this, R.string.food_added, Toast.LENGTH_SHORT).show()
 
-                // Enviar un resultado exitoso a AddMealActivity
-                setResult(Activity.RESULT_OK)
-                finish()
+                        // Enviar un resultado exitoso a AddMealActivity
+                        setResult(Activity.RESULT_OK)
+                        finish()
+                    }
+                    .setNegativeButton(R.string.no, null)
+                    .show()
             } else {
                 Toast.makeText(this, R.string.complete_fields, Toast.LENGTH_SHORT).show()
             }
