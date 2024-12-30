@@ -11,7 +11,7 @@
         android:id="@+id/tvFoodName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Food Name"
+        android:text="@string/food_name"
         android:textStyle="bold"
         android:textSize="16sp" />
 
@@ -19,27 +19,27 @@
         android:id="@+id/tvFoodCalories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Calories: 0 kcal (per 100g)"
+        android:text="@string/calories_per_100g"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvFoodProteins"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Proteins: 0g"
+        android:text="@string/proteins_per_100g"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvFoodFats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fats: 0g"
+        android:text="@string/fats_per_100g"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvFoodCarbs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Carbs: 0g"
+        android:text="@string/carbs_per_100g"
         android:textSize="14sp" />
 </LinearLayout>

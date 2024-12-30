@@ -28,9 +28,15 @@ class FoodSearchAdapter(
         val ivFoodImage = view.findViewById<ImageView>(R.id.ivFoodImage)
         val tvFoodName = view.findViewById<TextView>(R.id.tvFoodName)
         val tvCalories = view.findViewById<TextView>(R.id.tvCalories)
+        val tvProtein = view.findViewById<TextView>(R.id.tvProtein)
+        val tvFat = view.findViewById<TextView>(R.id.tvFat)
+        val tvCarbs = view.findViewById<TextView>(R.id.tvCarbs)
 
         tvFoodName.text = food.name
-        tvCalories.text = "Calories: ${food.calories} kcal"
+        tvCalories.text = context.getString(R.string.calories_per_100g, food.calories)
+        tvProtein.text = context.getString(R.string.proteins_per_100g, food.protein)
+        tvFat.text = context.getString(R.string.fats_per_100g, food.fat)
+        tvCarbs.text = context.getString(R.string.carbs_per_100g, food.carbs)
 
         // Cargar la imagen si está disponible, de lo contrario usar un placeholder
         if (food.imageUrl.isNotEmpty()) {

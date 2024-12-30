@@ -13,6 +13,7 @@ class SearchFoodActivity : AppCompatActivity() {
     private lateinit var etSearchQuery: EditText
     private lateinit var btnSearch: Button
     private lateinit var lvSearchResults: ListView
+    private lateinit var progressBar: ProgressBar
     private lateinit var repository: FoodCalendarRepository
 
     private val client = OkHttpClient()
@@ -26,6 +27,7 @@ class SearchFoodActivity : AppCompatActivity() {
         etSearchQuery = findViewById(R.id.etSearchQuery)
         btnSearch = findViewById(R.id.btnSearch)
         lvSearchResults = findViewById(R.id.lvSearchResults)
+        progressBar = findViewById(R.id.progressBar)
 
         btnSearch.setOnClickListener {
             val query = etSearchQuery.text.toString().trim()
@@ -55,6 +57,9 @@ class SearchFoodActivity : AppCompatActivity() {
     }
 
     private fun searchFood(query: String) {
+        progressBar.visibility = ProgressBar.VISIBLE
+        btnSearch.isEnabled = false
+
         val url = "https://world.openfoodfacts.org/cgi/search.pl?search_terms=$query&search_simple=1&json=1"
 
         val request = Request.Builder()
@@ -64,6 +69,8 @@ class SearchFoodActivity : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
+                    progressBar.visibility = ProgressBar.GONE
+                    btnSearch.isEnabled = true
                     Toast.makeText(this@SearchFoodActivity, "Failed to fetch results", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -87,6 +94,8 @@ class SearchFoodActivity : AppCompatActivity() {
                     }
 
                     runOnUiThread {
+                        progressBar.visibility = ProgressBar.GONE
+                        btnSearch.isEnabled = true
                         val adapter = FoodSearchAdapter(this@SearchFoodActivity, foods)
                         lvSearchResults.adapter = adapter
                     }
@@ -94,14 +103,5 @@ class SearchFoodActivity : AppCompatActivity() {
             }
 
         })
-    }
-
-    private fun saveFoodToDatabase(food: Food) {
-        repository.addFood(food.name, food.calories, food.protein, food.fat, food.carbs)
-        Toast.makeText(this, "Food added successfully!", Toast.LENGTH_SHORT).show()
-
-        // Enviar resultado a AddMealActivity
-        setResult(Activity.RESULT_OK)
-        finish()
     }
 }
