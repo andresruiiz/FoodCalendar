@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:layout_above="@id/bottom_nav_fragment">
 
         <TextView
             android:id="@+id/statisticsTitle"
@@ -22,8 +23,9 @@
 
         <CalendarView
             android:id="@+id/calendarView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp" />
 
         <TextView
@@ -64,14 +66,15 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/total_carbs" />
 
         <ListView
             android:id="@+id/mealsListView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:dividerHeight="1dp" />
+            android:layout_height="wrap_content"
+            android:dividerHeight="1dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <fragment
