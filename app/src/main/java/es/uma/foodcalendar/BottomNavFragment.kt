@@ -31,23 +31,26 @@ class BottomNavFragment : Fragment() {
         bottomNavigationView.selectedItemId = selectedItemId
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            // Save the selected item ID to SharedPreferences
-            sharedPreferences.edit().putInt("selected_item_id", item.itemId).apply()
+        // Save the selected item ID to SharedPreferences
+        sharedPreferences.edit().putInt("selected_item_id", item.itemId).apply()
 
-            when (item.itemId) {
-                R.id.navigation_home -> {
-                    startActivity(Intent(activity, DailySummaryActivity::class.java))
-                    true
-                }
-                R.id.navigation_statistics -> {
-                    startActivity(Intent(activity, StatisticsActivity::class.java))
-                    true
-                }
-                R.id.navigation_profile -> {
-                    startActivity(Intent(activity, ProfileActivity::class.java))
-                    true
-                }
-                else -> false
+        when (item.itemId) {
+            R.id.navigation_home -> {
+                startActivity(Intent(activity, DailySummaryActivity::class.java))
+                activity?.overridePendingTransition(0, 0)
+                true
+            }
+            R.id.navigation_statistics -> {
+                startActivity(Intent(activity, StatisticsActivity::class.java))
+                activity?.overridePendingTransition(0, 0)
+                true
+            }
+            R.id.navigation_profile -> {
+                startActivity(Intent(activity, ProfileActivity::class.java))
+                activity?.overridePendingTransition(0, 0)
+                true
+            }
+            else -> false
             }
         }
     }
