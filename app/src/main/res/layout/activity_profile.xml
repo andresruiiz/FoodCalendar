@@ -20,18 +20,33 @@
             android:layout_marginBottom="16dp"/>
 
         <TextView
-            android:id="@+id/user_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/user_weight"
-            android:textSize="18sp" />
-
-        <TextView
             android:id="@+id/user_height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/user_height"
             android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_weight"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical" />
+
+            <EditText
+                android:id="@+id/user_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:hint="@string/user_weight"
+                android:inputType="number" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,6 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:autofillHints=""
                 android:hint="@string/calorie_goal"
                 android:inputType="number" />
         </LinearLayout>

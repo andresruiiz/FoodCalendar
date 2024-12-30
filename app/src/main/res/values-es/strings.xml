@@ -46,11 +46,11 @@
     <string name="add_new_food">Añadir nuevo alimento</string>
     <string name="select_a_food">Selecciona un alimento</string>
     <string name="user_name">Nombre de usuario</string>
-    <string name="user_weight">Peso: %1$d kg</string>
+    <string name="user_weight">Peso (kg)</string>
     <string name="user_height">Altura: %1$d cm</string>
     <string name="calorie_goal">Objetivo de calorías (kcal/día)</string>
     <string name="save_button">Guardar</string>
-    <string name="calorie_goal_updated">Objetivo de calorías actualizado</string>
+    <string name="calorie_goal_updated">Datos del usuario actualizados</string>
     <string name="food_added">Alimento añadido correctamente</string>
     <string name="complete_fields">Por favor completa todos los campos</string>
     <string name="meal_quantity_updated">Cantidad de comida actualizada</string>
@@ -83,10 +83,11 @@
     <string name="profile">Perfil</string>
     <string name="confirmation">Confirmación</string>
     <string name="confirm_save_food">¿Estás seguro de que deseas guardar este alimento?</string>
-    <string name="confirm_save_meal">¿Estás seguro de que deseas guardar esta comida?</string>
+    <string name="confirm_save_meal">¿Estás seguro de que deseas guardar esta comida? Esta acción no se puede deshacer.</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
     <string name="delete">Eliminar</string>
     <string name="confirm_delete_food">¿Estás seguro de que deseas borrar %1$s?</string>
     <string name="food_deleted">Alimento borrado correctamente</string>
+    <string name="confirm_save_data">¿Estás seguro de que deseas actualizar estos datos?</string>
 </resources>

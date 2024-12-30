@@ -1,6 +1,7 @@
 package es.uma.foodcalendar
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -26,20 +27,32 @@ class ProfileActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE)
         userName.text = sharedPreferences.getString("name", getString(R.string.user_name))
-        userWeight.text = getString(R.string.user_weight, sharedPreferences.getInt("weight", 70))
         userHeight.text = getString(R.string.user_height, sharedPreferences.getInt("height", 175))
+        userWeight.setText(sharedPreferences.getInt("weight", 70).toString())
         userGoal.setText(sharedPreferences.getInt("calorieGoal", 2000).toString())
 
         // Guardar el nuevo objetivo de calorías
         val saveButton = findViewById<Button>(R.id.save_button)
         saveButton.setOnClickListener {
+            val newWeight = userWeight.text.toString().toInt()
             val newGoal = userGoal.text.toString().toInt()
-            val editor = sharedPreferences.edit()
-            editor.putInt("calorieGoal", newGoal)
-            editor.apply()
 
-            Toast.makeText(this, R.string.calorie_goal_updated, Toast.LENGTH_SHORT).show()
-            recreate() // Recargar la actividad actual
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(R.string.confirmation)
+            builder.setMessage(R.string.confirm_save_data)
+            builder.setPositiveButton(R.string.yes) { dialog, which ->
+                val editor = sharedPreferences.edit()
+                editor.putInt("weight", newWeight)
+                editor.putInt("calorieGoal", newGoal)
+                editor.apply()
+
+                Toast.makeText(this, R.string.calorie_goal_updated, Toast.LENGTH_SHORT).show()
+                recreate() // Recargar la actividad actual
+            }
+            builder.setNegativeButton(R.string.no) { dialog, which ->
+                dialog.dismiss()
+            }
+            builder.show()
         }
     }
 

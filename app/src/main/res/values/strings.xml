@@ -46,11 +46,11 @@
     <string name="add_new_food">Add new food</string>
     <string name="select_a_food">Select a Food</string>
     <string name="user_name">User Name</string>
-    <string name="user_weight">Weight: %1$d kg</string>
+    <string name="user_weight">Weight (kg)</string>
     <string name="user_height">Height: %1$d cm</string>
     <string name="calorie_goal">Calorie goal (kcal/day)</string>
     <string name="save_button">Save</string>
-    <string name="calorie_goal_updated">Calorie goal updated</string>
+    <string name="calorie_goal_updated">User data updated</string>
     <string name="food_added">Food added successfully</string>
     <string name="complete_fields">Please complete all fields</string>
     <string name="meal_quantity_updated">Meal quantity updated</string>
@@ -83,10 +83,11 @@
     <string name="profile">Profile</string>
     <string name="confirmation">Confirmation</string>
     <string name="confirm_save_food">Are you sure you want to save this food?</string>
-    <string name="confirm_save_meal">Are you sure you want to save this meal?</string>
+    <string name="confirm_save_meal">Are you sure you want to save this meal? This action cannot be undone.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="delete">Delete</string>
     <string name="confirm_delete_food">Are you sure you want to delete %1$s?</string>
     <string name="food_deleted">Food deleted successfully</string>
+    <string name="confirm_save_data">Are you sure you want to update this data?</string>
 </resources>
