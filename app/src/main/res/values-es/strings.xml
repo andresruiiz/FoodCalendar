@@ -72,4 +72,13 @@
     <string name="total_proteins">Proteínas totales: %1$d g</string>
     <string name="total_fats">Grasas totales: %1$d g</string>
     <string name="total_carbs">Carbohidratos totales: %1$d g</string>
+    <string name="please_select_food">Por favor selecciona un alimento</string>
+    <string name="please_enter_valid_quantity">Por favor ingresa una cantidad válida</string>
+    <string name="added_food">Añadido %1$d g de %2$s (%3$d kcal)</string>
+    <string name="enter_search_term">Introduce un término de búsqueda</string>
+    <string name="failed_to_fetch">Error al obtener resultados</string>
+    <string name="search_food_by_name">Buscar alimento por nombre</string>
+    <string name="search">Buscar</string>
+    <string name="home">Inicio</string>
+    <string name="profile">Perfil</string>
 </resources>

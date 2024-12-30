@@ -34,7 +34,7 @@ class SearchFoodActivity : AppCompatActivity() {
             if (query.isNotEmpty()) {
                 searchFood(query)
             } else {
-                Toast.makeText(this, "Please enter a search term", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.enter_search_term, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -48,7 +48,7 @@ class SearchFoodActivity : AppCompatActivity() {
                 fat = selectedFood.fat,
                 carbs = selectedFood.carbs
             )
-            Toast.makeText(this, "Food added successfully!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.food_added, Toast.LENGTH_SHORT).show()
 
             // Enviar resultado a AddMealActivity
             setResult(Activity.RESULT_OK)
@@ -71,7 +71,7 @@ class SearchFoodActivity : AppCompatActivity() {
                 runOnUiThread {
                     progressBar.visibility = ProgressBar.GONE
                     btnSearch.isEnabled = true
-                    Toast.makeText(this@SearchFoodActivity, "Failed to fetch results", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SearchFoodActivity, R.string.failed_to_fetch, Toast.LENGTH_SHORT).show()
                 }
             }
 

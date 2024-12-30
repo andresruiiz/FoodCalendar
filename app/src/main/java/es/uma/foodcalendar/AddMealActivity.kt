@@ -45,13 +45,13 @@ class AddMealActivity : AppCompatActivity() {
         btnAddMeal.setOnClickListener {
             val food = selectedFood
             if (food == null) {
-                Toast.makeText(this, "Please select a food", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.please_select_food), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val quantity = etFoodQuantity.text.toString().toIntOrNull()
             if (quantity == null || quantity <= 0) {
-                Toast.makeText(this, "Please enter a valid quantity", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.please_enter_valid_quantity), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -64,11 +64,10 @@ class AddMealActivity : AppCompatActivity() {
                 timeOfDay = timeOfDay,
                 quantity = quantity
             )
-            Toast.makeText(this, "Added $quantity g of ${food.name} ($totalCalories kcal)", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.added_food, quantity, food.name, totalCalories), Toast.LENGTH_SHORT).show()
             setResult(Activity.RESULT_OK)
             finish()
         }
-
 
         // Botón para añadir un nuevo alimento
         btnAddNewFood.setOnClickListener {

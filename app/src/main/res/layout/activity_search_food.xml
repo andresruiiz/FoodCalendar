@@ -10,7 +10,7 @@
         android:id="@+id/etSearchQuery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search food by name"
+        android:hint="@string/search_food_by_name"
         android:inputType="text"
         android:layout_marginBottom="8dp" />
 
@@ -18,7 +18,7 @@
         android:id="@+id/btnSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search" />
+        android:text="@string/search" />
 
     <ProgressBar
         android:id="@+id/progressBar"

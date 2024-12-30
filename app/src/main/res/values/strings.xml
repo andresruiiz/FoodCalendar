@@ -72,4 +72,13 @@
     <string name="total_proteins">Total Proteins: %1$d g</string>
     <string name="total_fats">Total Fats: %1$d g</string>
     <string name="total_carbs">Total Carbs: %1$d g</string>
+    <string name="please_select_food">Please select a food</string>
+    <string name="please_enter_valid_quantity">Please enter a valid quantity</string>
+    <string name="added_food">Added %1$d g of %2$s (%3$d kcal)</string>
+    <string name="enter_search_term">Please enter a search term</string>
+    <string name="failed_to_fetch">Failed to fetch results</string>
+    <string name="search_food_by_name">Search food by name</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
 </resources>

@@ -24,7 +24,6 @@ class ProfileActivity : AppCompatActivity() {
         val userHeight = findViewById<TextView>(R.id.user_height)
         val userGoal = findViewById<EditText>(R.id.user_goal)
 
-        // Aquí deberías obtener los datos del usuario desde tu base de datos o SharedPreferences
         val sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE)
         userName.text = sharedPreferences.getString("name", getString(R.string.user_name))
         userWeight.text = getString(R.string.user_weight, sharedPreferences.getInt("weight", 70))
