@@ -1,6 +1,7 @@
 package es.uma.foodcalendar
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -41,18 +42,25 @@ class SearchFoodActivity : AppCompatActivity() {
         lvSearchResults.setOnItemClickListener { _, _, position, _ ->
             val selectedFood = lvSearchResults.adapter.getItem(position) as FoodSearchResult
 
-            repository.addFood(
-                name = selectedFood.name,
-                calories = selectedFood.calories,
-                protein = selectedFood.protein,
-                fat = selectedFood.fat,
-                carbs = selectedFood.carbs
-            )
-            Toast.makeText(this, R.string.food_added, Toast.LENGTH_SHORT).show()
+            AlertDialog.Builder(this)
+                .setTitle(R.string.confirmation)
+                .setMessage(R.string.confirm_save_food)
+                .setPositiveButton(R.string.yes) { dialog, which ->
+                    repository.addFood(
+                        name = selectedFood.name,
+                        calories = selectedFood.calories,
+                        protein = selectedFood.protein,
+                        fat = selectedFood.fat,
+                        carbs = selectedFood.carbs
+                    )
+                    Toast.makeText(this, R.string.food_added, Toast.LENGTH_SHORT).show()
 
-            // Enviar resultado a AddMealActivity
-            setResult(Activity.RESULT_OK)
-            finish()
+                    // Enviar resultado a AddMealActivity
+                    setResult(Activity.RESULT_OK)
+                    finish()
+                }
+                .setNegativeButton(R.string.no, null)
+                .show()
         }
     }
 
