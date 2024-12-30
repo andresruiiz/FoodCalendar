@@ -61,6 +61,8 @@
     <string name="add_meal">Add Meal</string>
     <string name="calories_per_100g">Calories: %1$d kcal (per 100g)</string>
     <string name="proteins_per_100g">Proteins: %1$d g</string>
+    <string name="fats_per_100g">Fats: %1$d g</string>
+    <string name="carbs_per_100g">Carbs: %1$d g</string>
     <string name="no_meals">No meals added</string>
     <string name="meal_added">Meal added successfully!</string>
     <string name="select_food">Select a food</string>

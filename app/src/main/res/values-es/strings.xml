@@ -61,6 +61,8 @@
     <string name="add_meal">Añadir Comida</string>
     <string name="calories_per_100g">Calorías: %1$d kcal (por 100g)</string>
     <string name="proteins_per_100g">Proteínas: %1$d g</string>
+    <string name="fats_per_100g">Grasas: %1$d g</string>
+    <string name="carbs_per_100g">Carbohidratos: %1$d g</string>
     <string name="no_meals">No hay comidas añadidas</string>
     <string name="meal_added">¡Comida añadida correctamente!</string>
     <string name="select_food">Selecciona un alimento</string>

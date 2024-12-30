@@ -26,13 +26,18 @@ class FoodListAdapter(
         val tvFoodName = view.findViewById<TextView>(R.id.tvFoodName)
         val tvFoodCalories = view.findViewById<TextView>(R.id.tvFoodCalories)
         val tvFoodProteins = view.findViewById<TextView>(R.id.tvFoodProteins)
+        val tvFoodFats = view.findViewById<TextView>(R.id.tvFoodFats)
+        val tvFoodCarbs = view.findViewById<TextView>(R.id.tvFoodCarbs)
 
         val food = getItem(position)
+
         tvFoodName.text = food.name
         tvFoodCalories.text = context.getString(R.string.calories_per_100g, food.calories)
         tvFoodProteins.text = context.getString(R.string.proteins_per_100g, food.protein)
+        tvFoodFats.text = context.getString(R.string.fats_per_100g, food.fat)
+        tvFoodCarbs.text = context.getString(R.string.carbs_per_100g, food.carbs)
 
-        // Resaltar todo el fondo si está seleccionado
+        // Resaltar el elemento si está seleccionado
         if (position == selectedPosition) {
             view.setBackgroundColor(ContextCompat.getColor(context, R.color.selected_item_background))
         } else {
@@ -41,6 +46,7 @@ class FoodListAdapter(
 
         return view
     }
+
 
     fun setSelectedPosition(position: Int) {
         selectedPosition = position

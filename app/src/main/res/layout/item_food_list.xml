@@ -28,5 +28,18 @@
         android:layout_height="wrap_content"
         android:text="Proteins: 0g"
         android:textSize="14sp" />
-</LinearLayout>
 
+    <TextView
+        android:id="@+id/tvFoodFats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fats: 0g"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvFoodCarbs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Carbs: 0g"
+        android:textSize="14sp" />
+</LinearLayout>
