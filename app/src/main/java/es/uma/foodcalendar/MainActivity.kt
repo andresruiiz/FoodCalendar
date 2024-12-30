@@ -31,14 +31,6 @@ class MainActivity : AppCompatActivity() {
         val heightInput = findViewById<EditText>(R.id.heightInput)
         val calorieGoalInput = findViewById<EditText>(R.id.calorieGoalInput)
         val saveButton = findViewById<Button>(R.id.saveButton)
-        val fabProfile = findViewById<FloatingActionButton>(R.id.fab_profile)
-
-        // Check if data is already saved.
-        if (userExists(sharedPreferences)) {
-            fabProfile.show()
-        } else {
-            fabProfile.hide()
-        }
 
         saveButton.setOnClickListener {
             val name = nameInput.text.toString()
@@ -56,9 +48,6 @@ class MainActivity : AppCompatActivity() {
 
                 Toast.makeText(this, R.string.user_data_saved, Toast.LENGTH_SHORT).show()
 
-                // Show the floating action button
-                fabProfile.show()
-
                 // Navigate to DailySummaryActivity (next step)
                 val intent = Intent(this, DailySummaryActivity::class.java)
                 startActivity(intent)
@@ -66,12 +55,6 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, R.string.complete_fields, Toast.LENGTH_SHORT).show()
             }
-        }
-
-        // Listener for the floating action button to navigate to ProfileActivity
-        fabProfile.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
         }
     }
 

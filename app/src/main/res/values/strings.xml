@@ -48,7 +48,7 @@
     <string name="user_name">User Name</string>
     <string name="user_weight">Weight: %1$d kg</string>
     <string name="user_height">Height: %1$d cm</string>
-    <string name="calorie_goal">Calorie Goal</string>
+    <string name="calorie_goal">Calorie goal (kcal/day)</string>
     <string name="save_button">Save</string>
     <string name="calorie_goal_updated">Calorie goal updated</string>
     <string name="food_added">Food added successfully</string>

@@ -48,7 +48,7 @@
     <string name="user_name">Nombre de usuario</string>
     <string name="user_weight">Peso: %1$d kg</string>
     <string name="user_height">Altura: %1$d cm</string>
-    <string name="calorie_goal">Objetivo de Calorías</string>
+    <string name="calorie_goal">Objetivo de calorías (kcal/día)</string>
     <string name="save_button">Guardar</string>
     <string name="calorie_goal_updated">Objetivo de calorías actualizado</string>
     <string name="food_added">Alimento añadido correctamente</string>
