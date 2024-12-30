@@ -67,4 +67,9 @@
     <string name="meal_added">Meal added successfully!</string>
     <string name="select_food">Select a food</string>
     <string name="quantity_required">Please enter a valid quantity</string>
+    <string name="average_calories">Average Calories: %1$d kcal</string>
+    <string name="meal_count">Meal Count: %1$d</string>
+    <string name="total_proteins">Total Proteins: %1$d g</string>
+    <string name="total_fats">Total Fats: %1$d g</string>
+    <string name="total_carbs">Total Carbs: %1$d g</string>
 </resources>

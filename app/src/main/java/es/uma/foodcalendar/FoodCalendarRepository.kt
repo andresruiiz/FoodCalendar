@@ -76,7 +76,10 @@ class FoodCalendarRepository(context: Context) {
         val db = dbHelper.readableDatabase
         val query = """
         SELECT m.${BaseColumns._ID}, f.${FoodCalendarContract.Foods.COLUMN_NAME}, 
-               f.${FoodCalendarContract.Foods.COLUMN_CALORIES}, 
+               f.${FoodCalendarContract.Foods.COLUMN_CALORIES},
+                f.${FoodCalendarContract.Foods.COLUMN_PROTEIN},
+                f.${FoodCalendarContract.Foods.COLUMN_FAT},
+                f.${FoodCalendarContract.Foods.COLUMN_CARBS},
                m.${FoodCalendarContract.Meals.COLUMN_QUANTITY}, 
                m.${FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY}, 
                m.${FoodCalendarContract.Meals.COLUMN_DATE}
@@ -92,11 +95,14 @@ class FoodCalendarRepository(context: Context) {
             val id = cursor.getLong(cursor.getColumnIndexOrThrow(BaseColumns._ID))
             val name = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_NAME))
             val calories = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_CALORIES))
+            val proteins = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_PROTEIN))
+            val fats = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_FAT))
+            val carbs = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_CARBS))
             val quantity = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_QUANTITY))
             val time = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY))
             val mealDate = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_DATE))
 
-            meals.add(Meal(id, name, (calories * quantity) / 100, quantity, time, mealDate))
+            meals.add(Meal(id, name, (calories * quantity) / 100, (proteins * quantity) / 100, (fats * quantity) / 100, (carbs * quantity) / 100, quantity, time, mealDate))
         }
         cursor.close()
         return meals
@@ -108,7 +114,10 @@ class FoodCalendarRepository(context: Context) {
         val db = dbHelper.readableDatabase
         val query = """
         SELECT m.${BaseColumns._ID}, f.${FoodCalendarContract.Foods.COLUMN_NAME}, 
-               f.${FoodCalendarContract.Foods.COLUMN_CALORIES}, 
+               f.${FoodCalendarContract.Foods.COLUMN_CALORIES},
+               f.${FoodCalendarContract.Foods.COLUMN_PROTEIN},
+                f.${FoodCalendarContract.Foods.COLUMN_FAT},
+                f.${FoodCalendarContract.Foods.COLUMN_CARBS},
                m.${FoodCalendarContract.Meals.COLUMN_QUANTITY}, 
                m.${FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY}, 
                m.${FoodCalendarContract.Meals.COLUMN_DATE}
@@ -125,11 +134,14 @@ class FoodCalendarRepository(context: Context) {
             val id = cursor.getLong(cursor.getColumnIndexOrThrow(BaseColumns._ID))
             val name = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_NAME))
             val calories = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_CALORIES))
+            val proteins = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_PROTEIN))
+            val fats = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_FAT))
+            val carbs = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_CARBS))
             val quantity = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_QUANTITY))
             val time = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY))
             val mealDate = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_DATE))
 
-            meals.add(Meal(id, name, (calories * quantity) / 100, quantity, time, mealDate))
+            meals.add(Meal(id, name, (calories * quantity) / 100, (proteins * quantity) / 100, (fats * quantity) / 100, (carbs * quantity) / 100, quantity, time, mealDate))
         }
         cursor.close()
         return meals
@@ -140,6 +152,9 @@ class FoodCalendarRepository(context: Context) {
         val query = """
         SELECT m.${BaseColumns._ID}, f.${FoodCalendarContract.Foods.COLUMN_NAME}, 
                f.${FoodCalendarContract.Foods.COLUMN_CALORIES}, 
+               f.${FoodCalendarContract.Foods.COLUMN_PROTEIN},
+                f.${FoodCalendarContract.Foods.COLUMN_FAT},
+                f.${FoodCalendarContract.Foods.COLUMN_CARBS},
                m.${FoodCalendarContract.Meals.COLUMN_QUANTITY}, 
                m.${FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY}, 
                m.${FoodCalendarContract.Meals.COLUMN_DATE}
@@ -157,11 +172,14 @@ class FoodCalendarRepository(context: Context) {
             val id = cursor.getLong(cursor.getColumnIndexOrThrow(BaseColumns._ID))
             val name = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_NAME))
             val calories = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_CALORIES))
+            val proteins = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_PROTEIN))
+            val fats = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_FAT))
+            val carbs = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Foods.COLUMN_CARBS))
             val quantity = cursor.getInt(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_QUANTITY))
             val time = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY))
             val mealDate = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_DATE))
 
-            meal = Meal(id, name, (calories * quantity) / 100, quantity, time, mealDate)
+            meal = Meal(id, name, (calories * quantity) / 100, (proteins * quantity) / 100, (fats * quantity) / 100, (carbs * quantity) / 100, quantity, time, mealDate)
         }
 
         cursor.close()

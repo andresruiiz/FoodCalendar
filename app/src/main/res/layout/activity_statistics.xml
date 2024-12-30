@@ -34,13 +34,6 @@
             android:textSize="16sp"
             android:layout_marginBottom="8dp" />
 
-        <ListView
-            android:id="@+id/mealsListView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:dividerHeight="1dp" />
-
         <TextView
             android:id="@+id/totalCalories"
             android:layout_width="match_parent"
@@ -48,6 +41,37 @@
             android:textSize="16sp"
             android:layout_marginTop="16dp"
             android:text="@string/total_calories" />
+
+        <TextView
+            android:id="@+id/totalProteins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/total_proteins" />
+
+        <TextView
+            android:id="@+id/totalFats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/total_fats" />
+
+        <TextView
+            android:id="@+id/totalCarbs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/total_carbs" />
+
+        <ListView
+            android:id="@+id/mealsListView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:dividerHeight="1dp" />
     </LinearLayout>
 
     <fragment

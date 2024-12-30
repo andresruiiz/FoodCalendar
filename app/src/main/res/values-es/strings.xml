@@ -67,4 +67,9 @@
     <string name="meal_added">¡Comida añadida correctamente!</string>
     <string name="select_food">Selecciona un alimento</string>
     <string name="quantity_required">Por favor, introduce una cantidad válida</string>
+    <string name="average_calories">Calorías promedio: %1$d kcal</string>
+    <string name="meal_count">Número de comidas: %1$d</string>
+    <string name="total_proteins">Proteínas totales: %1$d g</string>
+    <string name="total_fats">Grasas totales: %1$d g</string>
+    <string name="total_carbs">Carbohidratos totales: %1$d g</string>
 </resources>

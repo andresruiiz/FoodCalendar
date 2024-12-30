@@ -13,6 +13,9 @@ class StatisticsActivity : AppCompatActivity() {
     private lateinit var selectedDateLabel: TextView
     private lateinit var mealsListView: ListView
     private lateinit var totalCalories: TextView
+    private lateinit var totalProteins: TextView
+    private lateinit var totalFats: TextView
+    private lateinit var totalCarbs: TextView
 
     private var selectedDate: String = ""
 
@@ -28,6 +31,9 @@ class StatisticsActivity : AppCompatActivity() {
         selectedDateLabel = findViewById(R.id.selectedDateLabel)
         mealsListView = findViewById(R.id.mealsListView)
         totalCalories = findViewById(R.id.totalCalories)
+        totalProteins = findViewById(R.id.totalProteins)
+        totalFats = findViewById(R.id.totalFats)
+        totalCarbs = findViewById(R.id.totalCarbs)
 
         // Configurar fecha inicial
         selectedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
@@ -52,6 +58,9 @@ class StatisticsActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.no_meals_for_date), Toast.LENGTH_SHORT).show()
             mealsListView.adapter = null
             totalCalories.text = getString(R.string.total_calories, 0)
+            totalProteins.text = getString(R.string.total_proteins, 0)
+            totalFats.text = getString(R.string.total_fats, 0)
+            totalCarbs.text = getString(R.string.total_carbs, 0)
             return
         }
 
@@ -60,16 +69,33 @@ class StatisticsActivity : AppCompatActivity() {
         val mealDescriptions = groupedMeals.map { (timeOfDay, meals) ->
             val totalCaloriesForTime = meals.sumOf { it.calories }
             val mealDetails = meals.joinToString("\n") { meal ->
-                "- ${meal.name}: ${meal.calories} kcal (${meal.quantity}x)"
+                "- ${meal.name}: ${meal.calories} kcal (${meal.quantity}g)"
             }
-            "${timeOfDay.capitalize()}:\n$totalCaloriesForTime kcal\n$mealDetails"
+            "${translateTimeOfDay(timeOfDay)}:\n$totalCaloriesForTime kcal\n$mealDetails"
         }
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, mealDescriptions)
         mealsListView.adapter = adapter
 
-        // Calcular el total de calorías del día
+        // Calcular el total de calorías, proteínas, grasas y carbohidratos del día
         val totalCaloriesForDay = meals.sumOf { it.calories }
+        val totalProteinsForDay = meals.sumOf { it.proteins }
+        val totalFatsForDay = meals.sumOf { it.fats }
+        val totalCarbsForDay = meals.sumOf { it.carbs }
+
         totalCalories.text = getString(R.string.total_calories, totalCaloriesForDay)
+        totalProteins.text = getString(R.string.total_proteins, totalProteinsForDay)
+        totalFats.text = getString(R.string.total_fats, totalFatsForDay)
+        totalCarbs.text = getString(R.string.total_carbs, totalCarbsForDay)
+    }
+
+    private fun translateTimeOfDay(timeOfDay: String): String {
+        return when (timeOfDay.toLowerCase(Locale.getDefault())) {
+            "breakfast" -> getString(R.string.breakfast)
+            "lunch" -> getString(R.string.lunch)
+            "snack" -> getString(R.string.snack)
+            "dinner" -> getString(R.string.dinner)
+            else -> timeOfDay
+        }
     }
 }
