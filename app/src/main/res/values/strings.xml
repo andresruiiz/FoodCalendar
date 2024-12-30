@@ -9,10 +9,10 @@
     <string name="add_food">Add Food</string>
     <string name="introduce_details">Introduce the details</string>
     <string name="food_name">Food Name</string>
-    <string name="calories">Calories</string>
-    <string name="protein">Protein (g)</string>
-    <string name="fat">Fat (g)</string>
-    <string name="carbs">Carbs (g)</string>
+    <string name="calories">Calories (kcal/100g)</string>
+    <string name="protein">Protein (g per 100g)</string>
+    <string name="fat">Fat (g per 100g)</string>
+    <string name="carbs">Carbs (g per 100g)</string>
     <string-array name="meal_categories">
         <item>Breakfast</item>
         <item>Lunch</item>

@@ -9,10 +9,10 @@
     <string name="add_food">Añadir alimento</string>
     <string name="introduce_details">Introduce los detalles</string>
     <string name="food_name">Nombre del alimento</string>
-    <string name="calories">Calorías</string>
-    <string name="protein">Proteínas (g)</string>
-    <string name="fat">Grasas (g)</string>
-    <string name="carbs">Carbohidratos (g)</string>
+    <string name="calories">Calorías (kcal/100g)</string>
+    <string name="protein">Proteínas (g por cada 100g)</string>
+    <string name="fat">Grasas (g por cada 100g)</string>
+    <string name="carbs">Carbohidratos (g por cada 100g)</string>
     <string-array name="meal_categories">
         <item>Desayuno</item>
         <item>Almuerzo</item>
