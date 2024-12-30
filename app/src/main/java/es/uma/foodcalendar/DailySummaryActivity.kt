@@ -81,7 +81,7 @@ class DailySummaryActivity : AppCompatActivity() {
 
     private fun updateCalorieSummary(tvConsumed: TextView, tvRemaining: TextView) {
         val meals = repository.getMealsByDate(selectedDate)
-        val totalCalories = meals.sumOf { it.calories }
+        val totalCalories = meals.sumOf { it.calories * it.quantity / 100 } // Calcular calorías correctamente
 
         val calorieGoal = getSharedPreferences("UserData", MODE_PRIVATE)
             .getInt("calorieGoal", 2000) // Por defecto, 2000 kcal
@@ -97,12 +97,13 @@ class DailySummaryActivity : AppCompatActivity() {
             textView.text = getString(R.string.no_meals)
         } else {
             val mealDescriptions = meals.joinToString("\n") { meal ->
-                val actualCalories = meal.calories * meal.quantity / 100 // Calcular calorías reales
+                val actualCalories = meal.calories * meal.quantity / 100 // Calcular calorías correctamente
                 "- ${meal.name}: $actualCalories kcal (${meal.quantity}g)"
             }
             textView.text = mealDescriptions
         }
     }
+
 
 
     companion object {

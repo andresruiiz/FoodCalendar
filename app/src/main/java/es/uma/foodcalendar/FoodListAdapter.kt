@@ -22,23 +22,37 @@ class FoodListAdapter(
     override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = convertView ?: LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false)
-        val textView = view.findViewById<TextView>(android.R.id.text1)
+        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.item_food_list, parent, false)
+
+        val tvFoodName = view.findViewById<TextView>(R.id.tvFoodName)
+        val tvFoodCalories = view.findViewById<TextView>(R.id.tvFoodCalories)
+        val tvFoodProteins = view.findViewById<TextView>(R.id.tvFoodProteins)
 
         val food = getItem(position)
-        textView.text = food.name
 
-        // Cambiar el color de fondo si está seleccionado
+        tvFoodName.text = food.name
+        tvFoodCalories.text = "Calories: ${food.calories} kcal (per 100g)"
+        tvFoodProteins.text = "Proteins: ${food.protein}g"
+
+        // Manejar el fondo y color del texto para el estado seleccionado
         if (position == selectedPosition) {
-            textView.setBackgroundColor(ContextCompat.getColor(context, R.color.purple_200)) // Color seleccionado
-            textView.setTextColor(ContextCompat.getColor(context, android.R.color.white))
+            tvFoodName.setBackgroundColor(ContextCompat.getColor(context, R.color.selected_item_background))
+            tvFoodName.setTextColor(ContextCompat.getColor(context, R.color.white))
         } else {
-            textView.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent)) // Color por defecto
-            textView.setTextColor(ContextCompat.getColor(context, android.R.color.black))
+            tvFoodName.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
+            tvFoodName.setTextColor(ContextCompat.getColor(context, android.R.color.black))
         }
 
         return view
     }
+
+
+    // Detectar si el dispositivo está en modo oscuro
+    private fun isDarkTheme(): Boolean {
+        val nightModeFlags = context.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+        return nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES
+    }
+
 
     fun setSelectedPosition(position: Int) {
         selectedPosition = position
