@@ -83,6 +83,7 @@
     <string name="profile">Perfil</string>
     <string name="confirmation">Confirmación</string>
     <string name="confirm_save_food">¿Estás seguro de que deseas guardar este alimento?</string>
+    <string name="confirm_save_meal">¿Estás seguro de que deseas guardar esta comida?</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
 </resources>

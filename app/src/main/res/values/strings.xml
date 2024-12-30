@@ -83,6 +83,7 @@
     <string name="profile">Profile</string>
     <string name="confirmation">Confirmation</string>
     <string name="confirm_save_food">Are you sure you want to save this food?</string>
+    <string name="confirm_save_meal">Are you sure you want to save this meal?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
 </resources>
