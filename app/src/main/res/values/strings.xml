@@ -58,4 +58,6 @@
     <string name="meal_added_successfully">Meal added successfully</string>
     <string name="user_data_saved">Data saved successfully</string>
     <string name="search_food">Search food</string>
+    <string name="quantity_grams">Quantity (grams)</string>
+    <string name="add_meal">Add Meal</string>
 </resources>

@@ -19,6 +19,29 @@
         android:layout_weight="1"
         android:dividerHeight="1dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <EditText
+            android:id="@+id/etFoodQuantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:hint="@string/quantity_grams"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btnAddMeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_meal"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnAddNewFood"
         android:layout_width="match_parent"

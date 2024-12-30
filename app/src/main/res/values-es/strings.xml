@@ -58,4 +58,6 @@
     <string name="meal_added_successfully">Comida añadida correctamente</string>
     <string name="user_data_saved">Datos guardados correctamente</string>
     <string name="search_food">Buscar alimento</string>
+    <string name="quantity_grams">Cantidad (gramos)</string>
+    <string name="add_meal">Añadir Comida</string>
 </resources>

@@ -97,11 +97,13 @@ class DailySummaryActivity : AppCompatActivity() {
             textView.text = getString(R.string.no_meals)
         } else {
             val mealDescriptions = meals.joinToString("\n") { meal ->
-                "- ${meal.name}: ${meal.calories} kcal (x${meal.quantity})"
+                val actualCalories = meal.calories * meal.quantity / 100 // Calcular calorías reales
+                "- ${meal.name}: $actualCalories kcal (${meal.quantity}g)"
             }
             textView.text = mealDescriptions
         }
     }
+
 
     companion object {
         const val ADD_MEAL_REQUEST_CODE = 1

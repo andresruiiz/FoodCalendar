@@ -10,9 +10,13 @@ class AddMealActivity : AppCompatActivity() {
 
     private lateinit var repository: FoodCalendarRepository
     private lateinit var foodListView: ListView
+    private lateinit var etFoodQuantity: EditText
+    private lateinit var btnAddMeal: Button
     private lateinit var btnAddNewFood: Button
     private lateinit var btnSearchFood: Button
+    private var selectedFood: Food? = null
     private var foods: List<Food> = listOf()
+    private lateinit var adapter: FoodListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,80 +24,81 @@ class AddMealActivity : AppCompatActivity() {
 
         repository = FoodCalendarRepository(this)
         foodListView = findViewById(R.id.foodListView)
+        etFoodQuantity = findViewById(R.id.etFoodQuantity)
+        btnAddMeal = findViewById(R.id.btnAddMeal)
         btnAddNewFood = findViewById(R.id.btnAddNewFood)
         btnSearchFood = findViewById(R.id.btnSearchFood)
 
-        // Obtener la fecha y franja horaria desde el intent
         val date = intent.getStringExtra("date") ?: return
         val timeOfDay = intent.getStringExtra("timeOfDay") ?: return
 
-        // Cargar alimentos
+        // Cargar alimentos desde la base de datos
         loadFoods()
 
-        // Seleccionar un alimento y añadirlo como comida
+        // Seleccionar un alimento de la lista
         foodListView.setOnItemClickListener { _, _, position, _ ->
-            val selectedFood = foods[position]
+            selectedFood = foods[position]
+            adapter.setSelectedPosition(position) // Destacar visualmente el alimento seleccionado
+            Toast.makeText(this, "Selected: ${selectedFood?.name}", Toast.LENGTH_SHORT).show()
+        }
 
-            // Verificar si ya existe una comida para la misma fecha y franja horaria
-            val existingMeal = repository.getMealByFoodIdAndTime(
-                foodId = selectedFood.id,
-                date = date,
-                timeOfDay = timeOfDay
-            )
-
-            if (existingMeal != null) {
-                // Incrementar la cantidad si ya existe
-                repository.updateMealQuantity(existingMeal.id, existingMeal.quantity + 1)
-                Toast.makeText(this, R.string.meal_quantity_updated, Toast.LENGTH_SHORT).show()
-            } else {
-                // Añadir una nueva comida si no existe
-                repository.addMeal(
-                    foodId = selectedFood.id,
-                    date = date,
-                    timeOfDay = timeOfDay,
-                    quantity = 1
-                )
-                Toast.makeText(this, R.string.meal_added_successfully, Toast.LENGTH_SHORT).show()
+        // Añadir una comida con la cantidad especificada
+        btnAddMeal.setOnClickListener {
+            val food = selectedFood
+            if (food == null) {
+                Toast.makeText(this, "Please select a food", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
 
+            val quantity = etFoodQuantity.text.toString().toIntOrNull()
+            if (quantity == null || quantity <= 0) {
+                Toast.makeText(this, "Please enter a valid quantity", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Calcular calorías según la cantidad en gramos
+            val totalCalories = food.calories * quantity / 100
+
+            repository.addMeal(
+                foodId = food.id,
+                date = date,
+                timeOfDay = timeOfDay,
+                quantity = quantity
+            )
+            Toast.makeText(this, "Added $quantity g of ${food.name} ($totalCalories kcal)", Toast.LENGTH_SHORT).show()
             setResult(Activity.RESULT_OK)
             finish()
         }
 
 
-        // Navegar a AddFoodActivity para añadir un nuevo alimento
+        // Botón para añadir un nuevo alimento
         btnAddNewFood.setOnClickListener {
             val intent = Intent(this, AddFoodActivity::class.java)
             startActivityForResult(intent, ADD_FOOD_REQUEST_CODE)
         }
 
+        // Botón para buscar un alimento en la API
         btnSearchFood.setOnClickListener {
             val intent = Intent(this, SearchFoodActivity::class.java)
             startActivityForResult(intent, SEARCH_FOOD_REQUEST_CODE)
         }
-
     }
 
-    // Cargar alimentos desde la base de datos
     private fun loadFoods() {
         foods = repository.getAllFoods()
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, foods.map { it.name })
+        adapter = FoodListAdapter(this, foods)
         foodListView.adapter = adapter
     }
 
-    // Manejar el resultado al volver de AddFoodActivity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if ((requestCode == ADD_FOOD_REQUEST_CODE || requestCode == SEARCH_FOOD_REQUEST_CODE) && resultCode == Activity.RESULT_OK) {
             loadFoods()
         }
     }
 
-
-
     companion object {
         const val ADD_FOOD_REQUEST_CODE = 1
-        const val SEARCH_FOOD_REQUEST_CODE = 1
+        const val SEARCH_FOOD_REQUEST_CODE = 2
     }
 }
