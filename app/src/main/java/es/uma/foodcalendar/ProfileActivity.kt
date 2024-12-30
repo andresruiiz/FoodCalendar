@@ -39,7 +39,7 @@ class ProfileActivity : AppCompatActivity() {
             editor.apply()
 
             Toast.makeText(this, R.string.calorie_goal_updated, Toast.LENGTH_SHORT).show()
-            finish() // Return to the previous activity
+            recreate() // Recargar la actividad actual
         }
     }
 
