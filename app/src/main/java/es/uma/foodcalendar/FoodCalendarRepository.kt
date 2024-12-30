@@ -96,7 +96,7 @@ class FoodCalendarRepository(context: Context) {
             val time = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY))
             val mealDate = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_DATE))
 
-            meals.add(Meal(id, name, calories * quantity, quantity, time, mealDate))
+            meals.add(Meal(id, name, (calories * quantity) / 100, quantity, time, mealDate))
         }
         cursor.close()
         return meals
@@ -129,7 +129,7 @@ class FoodCalendarRepository(context: Context) {
             val time = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY))
             val mealDate = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_DATE))
 
-            meals.add(Meal(id, name, calories * quantity, quantity, time, mealDate))
+            meals.add(Meal(id, name, (calories * quantity) / 100, quantity, time, mealDate))
         }
         cursor.close()
         return meals
@@ -161,7 +161,7 @@ class FoodCalendarRepository(context: Context) {
             val time = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_TIME_OF_DAY))
             val mealDate = cursor.getString(cursor.getColumnIndexOrThrow(FoodCalendarContract.Meals.COLUMN_DATE))
 
-            meal = Meal(id, name, calories * quantity, quantity, time, mealDate)
+            meal = Meal(id, name, (calories * quantity) / 100, quantity, time, mealDate)
         }
 
         cursor.close()

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="?attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/tvFoodName"
@@ -28,3 +29,4 @@
         android:text="Proteins: 0g"
         android:textSize="14sp" />
 </LinearLayout>
+

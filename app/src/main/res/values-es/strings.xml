@@ -39,7 +39,6 @@
     <string name="dinner">Cena</string>
     <string name="snack">Merienda</string>
     <string name="add">Añadir</string>
-    <string name="no_meals">Sin comidas</string>
     <string name="statistics">Estadísticas</string>
     <string name="selected_date">Fecha seleccionada: %1$s</string>
     <string name="no_meals_for_date">No hay comidas registradas para esta fecha.</string>
@@ -60,4 +59,10 @@
     <string name="search_food">Buscar alimento</string>
     <string name="quantity_grams">Cantidad (gramos)</string>
     <string name="add_meal">Añadir Comida</string>
+    <string name="calories_per_100g">Calorías: %1$d kcal (por 100g)</string>
+    <string name="proteins_per_100g">Proteínas: %1$d g</string>
+    <string name="no_meals">No hay comidas añadidas</string>
+    <string name="meal_added">¡Comida añadida correctamente!</string>
+    <string name="select_food">Selecciona un alimento</string>
+    <string name="quantity_required">Por favor, introduce una cantidad válida</string>
 </resources>

@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import es.uma.foodcalendar.R
 
 class FoodListAdapter(
     private val context: Context,
     private val foods: List<Food>
 ) : android.widget.BaseAdapter() {
 
-    private var selectedPosition: Int = -1 // Índice del elemento seleccionado
+    private var selectedPosition: Int = -1
 
     override fun getCount(): Int = foods.size
 
@@ -29,30 +28,19 @@ class FoodListAdapter(
         val tvFoodProteins = view.findViewById<TextView>(R.id.tvFoodProteins)
 
         val food = getItem(position)
-
         tvFoodName.text = food.name
-        tvFoodCalories.text = "Calories: ${food.calories} kcal (per 100g)"
-        tvFoodProteins.text = "Proteins: ${food.protein}g"
+        tvFoodCalories.text = context.getString(R.string.calories_per_100g, food.calories)
+        tvFoodProteins.text = context.getString(R.string.proteins_per_100g, food.protein)
 
-        // Manejar el fondo y color del texto para el estado seleccionado
+        // Resaltar todo el fondo si está seleccionado
         if (position == selectedPosition) {
-            tvFoodName.setBackgroundColor(ContextCompat.getColor(context, R.color.selected_item_background))
-            tvFoodName.setTextColor(ContextCompat.getColor(context, R.color.white))
+            view.setBackgroundColor(ContextCompat.getColor(context, R.color.selected_item_background))
         } else {
-            tvFoodName.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
-            tvFoodName.setTextColor(ContextCompat.getColor(context, android.R.color.black))
+            view.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
         }
 
         return view
     }
-
-
-    // Detectar si el dispositivo está en modo oscuro
-    private fun isDarkTheme(): Boolean {
-        val nightModeFlags = context.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
-        return nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES
-    }
-
 
     fun setSelectedPosition(position: Int) {
         selectedPosition = position

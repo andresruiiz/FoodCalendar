@@ -38,8 +38,7 @@ class AddMealActivity : AppCompatActivity() {
         // Seleccionar un alimento de la lista
         foodListView.setOnItemClickListener { _, _, position, _ ->
             selectedFood = foods[position]
-            adapter.setSelectedPosition(position) // Destacar visualmente el alimento seleccionado
-            Toast.makeText(this, "Selected: ${selectedFood?.name}", Toast.LENGTH_SHORT).show()
+            adapter.setSelectedPosition(position) // Resaltar el elemento seleccionado
         }
 
         // Añadir una comida con la cantidad especificada
